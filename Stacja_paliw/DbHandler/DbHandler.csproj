@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CarWashHandler.cs" />
     <Compile Include="OrderHandler.cs" />
     <Compile Include="PriceHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

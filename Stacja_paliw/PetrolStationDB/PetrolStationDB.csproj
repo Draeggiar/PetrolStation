@@ -49,9 +49,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201703080955129_Initial migration.cs" />
-    <Compile Include="Migrations\201703080955129_Initial migration.Designer.cs">
-      <DependentUpon>201703080955129_Initial migration.cs</DependentUpon>
+    <Compile Include="Migrations\201703081148054_Init.cs" />
+    <Compile Include="Migrations\201703081148054_Init.Designer.cs">
+      <DependentUpon>201703081148054_Init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703081206156_Init1.cs" />
+    <Compile Include="Migrations\201703081206156_Init1.Designer.cs">
+      <DependentUpon>201703081206156_Init1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703081217519_decimal.cs" />
+    <Compile Include="Migrations\201703081217519_decimal.Designer.cs">
+      <DependentUpon>201703081217519_decimal.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -68,8 +76,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201703080955129_Initial migration.resx">
-      <DependentUpon>201703080955129_Initial migration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201703081148054_Init.resx">
+      <DependentUpon>201703081148054_Init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703081206156_Init1.resx">
+      <DependentUpon>201703081206156_Init1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703081217519_decimal.resx">
+      <DependentUpon>201703081217519_decimal.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

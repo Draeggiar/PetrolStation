@@ -10,16 +10,22 @@ namespace DomainModel
         [Required]
         public DateTime Date { get; set; }
         [Required]
-        public int Pb95 { get; set; }
+        [DataType(DataType.Currency)]
+        public decimal Pb95 { get; set; }
         [Required]
-        public int Pb98 { get; set; }
+        [DataType(DataType.Currency)]
+        public decimal Pb98 { get; set; }
         [Required]
-        public int Lpg { get; set; }
+        [DataType(DataType.Currency)]
+        public decimal Lpg { get; set; }
         [Required]
-        public int On { get; set; }
+        [DataType(DataType.Currency)]
+        public decimal On { get; set; }
         [Required]
-        public int Wash { get; set; }
+        [DataType(DataType.Currency)]
+        public decimal Wash { get; set; }
         [Required]
-        public int Waxing { get; set; }
+        [DataType(DataType.Currency)]
+        public decimal Waxing { get; set; }
     }
 }
