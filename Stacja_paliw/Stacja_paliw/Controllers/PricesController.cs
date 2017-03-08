@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using DomainModel;
 using PetrolStationDB;
@@ -19,6 +16,15 @@ namespace Stacja_paliw.Controllers
         public ActionResult Index()
         {
             return View(db.Prices.ToList());
+        }
+
+        public ActionResult IndexLast()
+        {
+            var items = from p in db.Prices select p;
+
+            //items = items.Last().ToString();
+
+            return View("PricesSimpleThumbnail", db.Prices.ToList().Last());
         }
 
         // GET: Prices/Details/5
@@ -51,6 +57,7 @@ namespace Stacja_paliw.Controllers
         {
             if (ModelState.IsValid)
             {
+                price.Date = DateTime.Now;
                 db.Prices.Add(price);
                 db.SaveChanges();
                 return RedirectToAction("Index");

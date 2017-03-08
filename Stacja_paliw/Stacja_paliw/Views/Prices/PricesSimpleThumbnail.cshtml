@@ -1,0 +1,64 @@
+﻿@model DomainModel.Price
+
+@{
+    ViewBag.Title = "PricesSimpleThumbnail";
+}
+
+<div class="container">
+    <h2>Ceny paliw</h2>
+    <div class="row">
+        <div class="col-xs-6 col-md-3">
+            <div class="thumbnail">
+                <img class="img-responsive center-block" src="http://petro-hurt.pl/wp-content/uploads/2014/03/pb95.gif" alt="pb95" />
+                <div class="caption">
+                    <h3>Pb95  <span class="price_style">@Html.DisplayFor(Model => Model.Pb95)</span></h3>    
+                                      
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6 col-md-3">
+            <div class="thumbnail">
+                <img class="img-responsive center-block" src="http://www.petroenergia.pl/sites/all/themes/business/images/pb98.gif" alt="pb98">
+                <div class="caption">
+                    <h3>Pb98  <span class="price_style">@Html.DisplayFor(Model => Model.Pb98)</span></h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6 col-md-3">
+            <div class="thumbnail">
+                <img class="img-responsive center-block" src="http://www.stacjaoktan.pl/uploads/images/ON%20diesel.png" alt="on">
+                <div class="caption">
+                    <h3>On  <span class="price_style">@Html.DisplayFor(Model => Model.On)</span></h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6 col-md-3">
+            <div class="thumbnail">
+                <img class="img-responsive center-block" src="https://lh6.ggpht.com/tnP5VzQeEUjie6NRqPuijp49Brz0Z8PqouUOEZGc48IP908FOOWQ1VCKasdWRUUqjiw=w300" alt="lpg">
+                <div class="caption">
+                    <h3>Lpg  <span class="price_style">@Html.DisplayFor(Model => Model.Lpg)</span></h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <h2>Myjnia</h2>
+    <div class="row">
+        <div class="col-xs-6 col-md-3">
+            <div class="thumbnail">
+                <img class="img-responsive center-block" src="https://image.shutterstock.com/z/stock-vector-vector-automatic-car-wash-sign-81546244.jpg" alt="wash">
+                <div class="caption">
+                    <h3>Mycie  <span class="price_style">@Html.DisplayFor(Model => Model.Wash)</span></h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6 col-md-3">
+            <div class="thumbnail">
+                <img class="img-responsive center-block" src="https://us.123rf.com/450wm/tanyastock/tanyastock1610/tanyastock161000910/63430232-clean-car-icon-cleaning-wash-station-sign-linear-icon-on-orange-background-vector.jpg?ver=6" alt="lpg">
+                <div class="caption">
+                    <h3>Woskowanie <span class="price_style">@Html.DisplayFor(Model => Model.Waxing)</span></h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
