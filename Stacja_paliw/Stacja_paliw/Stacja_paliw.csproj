@@ -172,6 +172,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PricesController.cs" />
+    <Compile Include="Controllers\VATsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -260,6 +261,11 @@
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
     <Content Include="Views\Prices\PricesSimpleThumbnail.cshtml" />
+    <Content Include="Views\VATs\Create.cshtml" />
+    <Content Include="Views\VATs\Delete.cshtml" />
+    <Content Include="Views\VATs\Details.cshtml" />
+    <Content Include="Views\VATs\Edit.cshtml" />
+    <Content Include="Views\VATs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

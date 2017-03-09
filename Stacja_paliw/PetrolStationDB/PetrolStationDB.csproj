@@ -61,6 +61,10 @@
     <Compile Include="Migrations\201703081217519_decimal.Designer.cs">
       <DependentUpon>201703081217519_decimal.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703091924571_vat + layality.cs" />
+    <Compile Include="Migrations\201703091924571_vat + layality.Designer.cs">
+      <DependentUpon>201703091924571_vat + layality.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PSDbContext.cs" />
@@ -84,6 +88,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703081217519_decimal.resx">
       <DependentUpon>201703081217519_decimal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703091924571_vat + layality.resx">
+      <DependentUpon>201703091924571_vat + layality.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
