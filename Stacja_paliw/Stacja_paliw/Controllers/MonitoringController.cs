@@ -9,32 +9,32 @@ namespace Stacja_paliw.Controllers
 {
     public class MonitoringController : Controller
     {
-        public MonitoringCompany.MonitoringService service = new MonitoringService();
+        private MonitoringCompany.MonitoringService _service = new MonitoringService();
         // GET: Monitoring
         public ActionResult Index()
         {
-            ViewBag.ServiceStatus = service.GetServiceStatus().MonitoringStarted.ToString().ToLower();
+            ViewBag.ServiceStatus = _service.GetServiceStatus().MonitoringStarted.ToString().ToLower();
             return View();
         }
 
         public ActionResult View(int cameraID)
         {
-            ViewBag.Message = service.ViewCamera(cameraID);
-            ViewBag.ServiceStatus = service.GetServiceStatus().MonitoringStarted.ToString().ToLower();
+            ViewBag.Message = _service.ViewCamera(cameraID);
+            ViewBag.ServiceStatus = _service.GetServiceStatus().MonitoringStarted.ToString().ToLower();
             return View("Index");
         }
 
         public ActionResult Start()
         {
-            ViewBag.Message = service.StartMonitoring();
-            ViewBag.ServiceStatus = service.GetServiceStatus().MonitoringStarted.ToString().ToLower();           
+            ViewBag.Message = _service.StartMonitoring();
+            ViewBag.ServiceStatus = _service.GetServiceStatus().MonitoringStarted.ToString().ToLower();           
             return View("Index");
         }
 
         public ActionResult Stop()
         {
-            ViewBag.Message = service.StopMonitoring();
-            ViewBag.ServiceStatus = service.GetServiceStatus().MonitoringStarted.ToString().ToLower();
+            ViewBag.Message = _service.StopMonitoring();
+            ViewBag.ServiceStatus = _service.GetServiceStatus().MonitoringStarted.ToString().ToLower();
             return View("Index");
         }
     }
