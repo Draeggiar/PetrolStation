@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewBag.Title = "_RoleDropdownsPartial";
+}
+
+@if (Request.IsAuthenticated && User.IsInRole("Admin"))
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+            <a href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle">Admin Isle<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li><a href="#">Manage users</a></li>
+            </ul>
+        </li>
+    </ul>
+}
+
+@if (Request.IsAuthenticated && User.IsInRole("Client")){
+    <ul class="nav navbar-nav">
+        <li>test</li>
+    </ul>
+    }
+
+
+@if (Request.IsAuthenticated && (User.IsInRole("Client") || User.IsInRole("Employee")
+        || User.IsInRole("Owner") || User.IsInRole("Admin")))
+{
+    <ul class="nav navbar-nav">
+        <li class="dropdown">
+            <a href = "#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle">Strefa Klienta<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                @*<li>@Html.ActionLink("Cennik", "IndexLast", "Prices")</li>*@
+                <li>@Html.ActionLink("Faktura VAT", "Index", "VATs")</li>
+                <li>Myjnia</li>
+            </ul>
+        </li>
+    </ul>     
+}
+
+@if (Request.IsAuthenticated && (User.IsInRole("Employee")
+                || User.IsInRole("Owner") || User.IsInRole("Admin")))
+{
+    <ul class="nav navbar-nav">
+        <li class="dropdown">
+            <a href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle">Narzędzia<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li>@Html.ActionLink("Zarządzanie monitoringiem", "Index", "Monitoring")</li>
+            </ul>
+        </li>
+    </ul>
+}
+
+@if (Request.IsAuthenticated && (User.IsInRole("Owner") || User.IsInRole("Admin")))
+{
+    <ul class="nav navbar-nav">
+        <li class="dropdown">
+            <a href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle">Narzędzia szefa<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li>Raporty</li>
+                <li>Dostawy</li>
+            </ul>
+        </li>
+    </ul>
+}
