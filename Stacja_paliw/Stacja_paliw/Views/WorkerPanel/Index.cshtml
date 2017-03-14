@@ -1,0 +1,11 @@
+﻿
+@{
+    ViewBag.Title = "Witaj <imię_pracownika>";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <input type="button" value="Centrum monitoringu", onclick="location.href='@Url.Action("Index","Monitoring")'" class="btn-default"/>
+</div>
