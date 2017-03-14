@@ -6,8 +6,9 @@ using System.Web.Mvc;
 
 namespace Stacja_paliw.Controllers
 {
-    public class HomeController : Controller
+    public class WorkerPanelController : Controller
     {
+        // GET: Worker
         public ActionResult Index()
         {
             return View();
