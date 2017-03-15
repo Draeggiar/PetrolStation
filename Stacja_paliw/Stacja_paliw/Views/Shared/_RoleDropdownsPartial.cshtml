@@ -15,13 +15,6 @@
     </ul>
 }
 
-@if (Request.IsAuthenticated && User.IsInRole("Client")){
-    <ul class="nav navbar-nav">
-        <li>test</li>
-    </ul>
-    }
-
-
 @if (Request.IsAuthenticated && (User.IsInRole("Client") || User.IsInRole("Employee")
         || User.IsInRole("Owner") || User.IsInRole("Admin")))
 {
