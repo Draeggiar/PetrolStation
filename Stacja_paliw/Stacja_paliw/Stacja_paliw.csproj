@@ -172,13 +172,14 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Worker\WorkerAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\MonitoringController.cs" />
+    <Compile Include="Areas\Worker\Controllers\MonitoringController.cs" />
     <Compile Include="Controllers\PricesController.cs" />
     <Compile Include="Controllers\VATsController.cs" />
-    <Compile Include="Controllers\WorkerPanelController.cs" />
+    <Compile Include="Areas\Worker\Controllers\WorkerPanelController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -207,6 +208,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Areas\Worker\Views\web.config" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
@@ -270,18 +272,19 @@
     <Content Include="Views\VATs\Details.cshtml" />
     <Content Include="Views\VATs\Edit.cshtml" />
     <Content Include="Views\VATs\Index.cshtml" />
-    <None Include="Views\Monitoring\Index.cshtml" />
-    <Content Include="Views\WorkerPanel\Index.cshtml" />
     <Content Include="Views\Shared\_UserHomePartial.cshtml" />
     <Content Include="Views\Shared\_AdminPartial.cshtml" />
     <Content Include="Views\Shared\_RoleDropdownsPartial.cshtml" />
+    <Content Include="Areas\Worker\Views\Monitoring\Index.cshtml" />
+    <Content Include="Areas\Worker\Views\WorkerPanel\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Worker\Models\" />
+    <Folder Include="Areas\Worker\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DbHandler\DbHandler.csproj">
