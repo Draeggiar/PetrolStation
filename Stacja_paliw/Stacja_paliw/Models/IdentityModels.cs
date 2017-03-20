@@ -1,5 +1,4 @@
-﻿using System.Data.Entity;
-using System.Security.Claims;
+﻿using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -11,11 +10,29 @@ namespace Stacja_paliw.Models
     {
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
+
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
-            // Add custom user claims here
+            // Add custom user claims here           
             return userIdentity;
         }
+
+        //public virtual UserInfo MyUserInfo { get; set; }
+    }
+
+    public class User : IdentityUser
+    {
+        public virtual UserInfo MyUserInfo { get; set; }
+    }
+    
+    public class UserInfo
+    {
+        public int Id { get; set; }
+        public virtual ApplicationUser UserId { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }       
+        public string Address { get; set; }
+        public long NIP_Regon { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -24,6 +41,8 @@ namespace Stacja_paliw.Models
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
+
+        public System.Data.Entity.DbSet<UserInfo> MyUserInfo { get; set; }
 
         public static ApplicationDbContext Create()
         {

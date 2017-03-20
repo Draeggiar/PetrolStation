@@ -61,6 +61,8 @@
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -70,6 +72,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -118,6 +121,7 @@
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="EntityFramework">
@@ -172,16 +176,33 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Worker\WorkerAreaRegistration.cs" />
+    <Compile Include="Areas\Worker\WorkerPanel.aspx.cs">
+      <DependentUpon>WorkerPanel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Areas\Worker\WorkerPanel.aspx.designer.cs">
+      <DependentUpon>WorkerPanel.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\MonitoringController.cs" />
+    <Compile Include="Areas\Worker\Controllers\MonitoringController.cs" />
     <Compile Include="Controllers\PricesController.cs" />
     <Compile Include="Controllers\VATsController.cs" />
-    <Compile Include="Controllers\WorkerPanelController.cs" />
+    <Compile Include="Areas\Worker\Controllers\WorkerPanelController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703151754488_user table.cs" />
+    <Compile Include="Migrations\201703151754488_user table.Designer.cs">
+      <DependentUpon>201703151754488_user table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703160830535_users info update.cs" />
+    <Compile Include="Migrations\201703160830535_users info update.Designer.cs">
+      <DependentUpon>201703160830535_users info update.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -189,6 +210,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Worker\WorkerPanel.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -207,6 +229,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Areas\Worker\Views\web.config" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
@@ -270,18 +293,19 @@
     <Content Include="Views\VATs\Details.cshtml" />
     <Content Include="Views\VATs\Edit.cshtml" />
     <Content Include="Views\VATs\Index.cshtml" />
-    <None Include="Views\Monitoring\Index.cshtml" />
-    <Content Include="Views\WorkerPanel\Index.cshtml" />
     <Content Include="Views\Shared\_UserHomePartial.cshtml" />
     <Content Include="Views\Shared\_AdminPartial.cshtml" />
     <Content Include="Views\Shared\_RoleDropdownsPartial.cshtml" />
+    <Content Include="Areas\Worker\Views\Monitoring\Index.cshtml" />
+    <Content Include="Views\Shared\_WebFormsMasterPage.master" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Worker\Models\" />
+    <Folder Include="Areas\Worker\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DbHandler\DbHandler.csproj">
@@ -292,10 +316,22 @@
       <Project>{d5f3fdb3-da4e-450e-a1c3-029a70c6b2b7}</Project>
       <Name>DomainModel</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FuelDistributors\FuelDistributors.csproj">
+      <Project>{f9548513-c406-49a3-88bf-c8a17c2c582a}</Project>
+      <Name>FuelDistributors</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PetrolStationDB\PetrolStationDB.csproj">
       <Project>{1be83b91-7400-4c49-a378-70e8475a023e}</Project>
       <Name>PetrolStationDB</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201703151754488_user table.resx">
+      <DependentUpon>201703151754488_user table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703160830535_users info update.resx">
+      <DependentUpon>201703160830535_users info update.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

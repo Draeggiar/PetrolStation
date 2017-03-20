@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetrolStationDB", "PetrolSt
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbHandler", "DbHandler\DbHandler.csproj", "{A82413A0-E09D-43FC-9460-C836877AB373}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FuelDistributors", "FuelDistributors\FuelDistributors.csproj", "{F9548513-C406-49A3-88BF-C8A17C2C582A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{A82413A0-E09D-43FC-9460-C836877AB373}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A82413A0-E09D-43FC-9460-C836877AB373}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A82413A0-E09D-43FC-9460-C836877AB373}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9548513-C406-49A3-88BF-C8A17C2C582A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9548513-C406-49A3-88BF-C8A17C2C582A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9548513-C406-49A3-88BF-C8A17C2C582A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9548513-C406-49A3-88BF-C8A17C2C582A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
