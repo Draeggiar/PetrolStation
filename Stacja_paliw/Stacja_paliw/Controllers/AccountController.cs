@@ -149,7 +149,6 @@ namespace Stacja_paliw.Controllers
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var userInfo = new UserInfo { FirstName = model.FirstName, LastName = model.LastName, Address = model.Address, NIP_Regon = model.NIP_Regon };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

@@ -6,6 +6,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Stacja_paliw.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Stacja_paliw.Controllers
 {
@@ -71,6 +72,35 @@ namespace Stacja_paliw.Controllers
                 Logins = await UserManager.GetLoginsAsync(userId),
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
             };
+            return View(model);
+        }
+
+        public ActionResult ChangeUserInfo()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangeUserInfo(UserInfo model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var store = new UserStore<ApplicationUser>();
+            var manager = new ApplicationUserManager(store);
+            var user = manager.Users.First(u => u.Id == User.Identity.GetUserId());
+
+            user.MyUserInfo.FirstName = model.FirstName;
+            user.MyUserInfo.LastName = model.LastName;
+            user.MyUserInfo.Address = model.Address;
+            user.MyUserInfo.NIP_Regon = model.NIP_Regon;
+            //user.MyUserInfo.UserId = User.Identity.GetUserId();
+
+            manager.Update(user);
+
             return View(model);
         }
 

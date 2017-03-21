@@ -202,6 +202,22 @@
     <Compile Include="Migrations\201703160830535_users info update.Designer.cs">
       <DependentUpon>201703160830535_users info update.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703210931322_user changes.cs" />
+    <Compile Include="Migrations\201703210931322_user changes.Designer.cs">
+      <DependentUpon>201703210931322_user changes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703210957117_user changes2.cs" />
+    <Compile Include="Migrations\201703210957117_user changes2.Designer.cs">
+      <DependentUpon>201703210957117_user changes2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703211002013_user changes3.cs" />
+    <Compile Include="Migrations\201703211002013_user changes3.Designer.cs">
+      <DependentUpon>201703211002013_user changes3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703211051324_user changes4.cs" />
+    <Compile Include="Migrations\201703211051324_user changes4.Designer.cs">
+      <DependentUpon>201703211051324_user changes4.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -298,6 +314,7 @@
     <Content Include="Views\Shared\_RoleDropdownsPartial.cshtml" />
     <Content Include="Areas\Worker\Views\Monitoring\Index.cshtml" />
     <Content Include="Views\Shared\_WebFormsMasterPage.master" />
+    <Content Include="Views\Manage\ChangeUserInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -331,6 +348,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703160830535_users info update.resx">
       <DependentUpon>201703160830535_users info update.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703210931322_user changes.resx">
+      <DependentUpon>201703210931322_user changes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703210957117_user changes2.resx">
+      <DependentUpon>201703210957117_user changes2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703211002013_user changes3.resx">
+      <DependentUpon>201703211002013_user changes3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703211051324_user changes4.resx">
+      <DependentUpon>201703211051324_user changes4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
