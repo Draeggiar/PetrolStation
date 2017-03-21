@@ -13,6 +13,8 @@ namespace FuelDistributors
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        #region ---Properties---
+
         public float Volume
         {
             get { return _volume; }
@@ -40,17 +42,24 @@ namespace FuelDistributors
 
         public string DistributorName { get;  }
 
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        public bool IsBusy{ get; set; }
 
-        public DistributorHandler(string distributorName)
+        public FuelTank FuelTank { get;}
+
+        #endregion
+
+        public DistributorHandler(string distributorName, FuelTank tank)
         {
             Volume = 0.0f;
             TotalPrice = 0.0f;
             DistributorName = distributorName;
+            FuelTank = tank;
+        }
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public void ResetDistributor()

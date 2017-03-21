@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,7 +16,7 @@ namespace FuelDistributors
         public List<DistributorHandler> Distributors { get; private set; }
         public BackgroundWorker Worker;
 
-        private DistributorsDataCallback _callback;
+        private readonly DistributorsDataCallback _callback;
 
         public MainWindow()
         { 
@@ -36,9 +35,12 @@ namespace FuelDistributors
         {
             Distributors = new List<DistributorHandler>
             {
-                new DistributorHandler("Dystrybutor 1"),
-                new DistributorHandler("Dystrybutor 2"),
-                new DistributorHandler("Dystrybutor 3")
+                new DistributorHandler("Dystrybutor 1",             
+                    new FuelTank {FuelLevel = 100.0, PressureInTank = 2.1}),
+                new DistributorHandler("Dystrybutor 2", 
+                    new FuelTank {FuelLevel = 100.0, PressureInTank = 3.0}),
+                new DistributorHandler("Dystrybutor 3", 
+                    new FuelTank {FuelLevel = 80.0, PressureInTank = 1.5})
             };
             DataContext = Distributors;
             Worker = new BackgroundWorker();
@@ -69,6 +71,7 @@ namespace FuelDistributors
 
         private void worker_DoWork(object sender, DoWorkEventArgs doWorkEventArgs, int distIndex)
         {
+            Distributors[distIndex].IsBusy = true;
             while (!Worker.CancellationPending)
             {
                 Distributors[distIndex].Volume += DistributorHandler.FuelAtOnce;
@@ -77,6 +80,7 @@ namespace FuelDistributors
                 System.Threading.Thread.Sleep(80);
             }
             doWorkEventArgs.Cancel = true;
+            Distributors[distIndex].IsBusy = false;
         }
     }
 }

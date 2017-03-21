@@ -1,6 +1,5 @@
 namespace Stacja_paliw.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
     
     public partial class usertable : DbMigration

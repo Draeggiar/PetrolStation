@@ -34,7 +34,7 @@
                             <asp:Label ID="lblTotalPrice" runat="server" Text='<%#Eval("TotalPrice") %>'/>
                         </td>
                         <td>
-                            <asp:TextBox ID="txtNIP" runat="server" Enabled="False" ToolTip="Wpisz NIP klienta"/>
+                            <asp:TextBox ID="txtNIP" runat="server" ToolTip="Wpisz NIP klienta"/>
                         </td>
                         <td>
                             <asp:Button ID="btnAcceptTransaction" runat="server" OnClick="btnAcceptTransaction_OnClick" Text="Zatwierdź transakcję"/>

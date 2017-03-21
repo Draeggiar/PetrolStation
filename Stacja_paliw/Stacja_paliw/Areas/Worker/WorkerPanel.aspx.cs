@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
+using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Web.UI.WebControls;
 using FuelDistributors;
 
@@ -10,7 +9,13 @@ namespace Stacja_paliw.Areas.Worker
 {
     public partial class WorkerPanel : System.Web.UI.Page
     {
+        #region ---Fields---
+
         private static List<DistributorHandler> _distributors;
+
+        #endregion
+
+        #region ---PageLoad---
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -18,8 +23,8 @@ namespace Stacja_paliw.Areas.Worker
             {
                 Thread t = new Thread(() =>
                 {                    
-                    MainWindow _mainWindow = new MainWindow(GetDistributorsData);
-                    _mainWindow.Show();
+                    MainWindow mainWindow = new MainWindow(GetDistributorsData);
+                    mainWindow.Show();
                     System.Windows.Threading.Dispatcher.Run();
                 });
                 t.SetApartmentState(ApartmentState.STA);
@@ -28,21 +33,66 @@ namespace Stacja_paliw.Areas.Worker
             }
         }
 
+        #endregion
+
+        #region ---PreRender---
+
         protected override void OnPreRender(EventArgs e)
         {
             base.OnPreRender(e);
             rptTransactions.DataSource = _distributors;
             rptTransactions.DataBind();
+            DispatchView();
         }
+
+        #endregion
+
+        #region ---Events---
 
         protected void btnAcceptTransaction_OnClick(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            foreach (DistributorHandler distributor in _distributors)
+            {
+                distributor.ResetDistributor();
+                //TODO drukowanie faktury
+            }
         }
 
-        private void GetDistributorsData(List<FuelDistributors.DistributorHandler> distributors)
+        #endregion
+
+        #region ---Methods---
+
+        private void GetDistributorsData(List<DistributorHandler> distributors)
         {
             _distributors = distributors;
         }
+
+        private void DispatchView()
+        {
+            foreach (RepeaterItem item in rptTransactions.Items)
+            {
+                if (item.ItemType == ListItemType.Item || item.ItemType == ListItemType.AlternatingItem)
+                {
+                    var txtNip = (TextBox) item.FindControl("txtNIP");
+                    var btnAcceptTransaction = (Button) item.FindControl("btnAcceptTransaction");
+
+                    if (
+                        _distributors.First(d => d.DistributorName == ((Label) item.FindControl("lblDistName")).Text)
+                            .IsBusy
+                        || ((Label) item.FindControl("lblTotalPrice")).Text == @"0")
+                    {
+                        txtNip.Attributes.Add("disabled", "disabled");
+                        btnAcceptTransaction.Attributes.Add("hidden", "hidden");
+                    }
+                    else
+                    {
+                        txtNip.Attributes.Add("enabled", "enabled");
+                        btnAcceptTransaction.Attributes.Add("visible", "visible");
+                    }
+                }
+            }
+        }
+
+        #endregion
     }
 }
