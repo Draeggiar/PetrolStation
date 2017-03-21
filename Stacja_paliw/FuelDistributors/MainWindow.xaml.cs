@@ -6,6 +6,7 @@ using System.Windows.Controls;
 
 namespace FuelDistributors
 {
+    public delegate void DistributorsDataCallback(List<DistributorHandler> distributors);
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -13,12 +14,26 @@ namespace FuelDistributors
     {
         public const float D1Price = 3.60f;
 
-        public List<DistributorHandler> Distributors { get;}
+        public List<DistributorHandler> Distributors { get; private set; }
         public BackgroundWorker Worker;
+
+        private DistributorsDataCallback _callback;
 
         public MainWindow()
         { 
             InitializeComponent();
+            InitializeDistributors();
+        }
+
+        public MainWindow(DistributorsDataCallback callbackDelegate)
+        {
+            InitializeComponent();
+            InitializeDistributors();
+            _callback = callbackDelegate;
+        }
+
+        private void InitializeDistributors()
+        {
             Distributors = new List<DistributorHandler>
             {
                 new DistributorHandler("Dystrybutor 1"),
@@ -58,6 +73,7 @@ namespace FuelDistributors
             {
                 Distributors[distIndex].Volume += DistributorHandler.FuelAtOnce;
                 Distributors[distIndex].TotalPrice += DistributorHandler.FuelAtOnce*D1Price;
+                _callback(Distributors);
                 System.Threading.Thread.Sleep(80);
             }
             doWorkEventArgs.Cancel = true;
