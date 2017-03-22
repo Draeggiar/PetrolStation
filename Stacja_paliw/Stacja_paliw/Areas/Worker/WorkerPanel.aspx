@@ -4,7 +4,7 @@
     <asp:ScriptManager runat="server"/>
     <asp:Timer runat="server" ID="timUpdater" Interval="1000" />
     
-    <a href='http://<%:HttpContext.Current.Request.Url.Authority %>/Worker/Monitoring' class="btn-default">Centrum monitoringu</a>
+    <a href='http://<%:HttpContext.Current.Request.Url.Authority %>/Worker/Monitoring' class="btn-link">Centrum monitoringu</a>
     <br/>
     <asp:UpdatePanel runat="server">
         <Triggers>

@@ -5,23 +5,32 @@
 
 <h2>@ViewBag.Title</h2>
 
-<div>
-    @if (ViewBag.ServiceStatus == "true")
-    {
-        <b>@ViewBag.Message</b>
-    }
-    else
-    {
-        <b>Usługa monitoringu nieaktywna</b>
-    }
-</div>
+<h3>@ViewBag.Authenticate</h3>
+<br/>
+@if (ViewBag.Authenticate != "Błąd autentykacji!")
+{
+    <div>
+        @if (ViewBag.ServiceStatus == "true")
+        {
+            <b>@ViewBag.Message</b>
+        }
+        else
+        {
+            <b>Usługa monitoringu nieaktywna</b>
+        }
+    </div>
 
-<div>
-    <!--Pracownik-->
-    <p><input type="button" value="Podgląd z kamery 1", onclick="location.href='@Url.Action("View")?cameraID='+1"/></p>
-    <p><input type="button" value="Podgląd z kamery 1" , onclick="location.href='@Url.Action("View")?cameraID='+2" /></p>
+    <div>
+        <!--Pracownik-->
+        <p><input type="button" value="Podgląd z kamery 1" , onclick="location.href = '@Url.Action("View")?cameraID=' + 1"/>
+        </p>
+        <p><input type="button" value="Podgląd z kamery 2" , onclick="location.href = '@Url.Action("View")?cameraID=' + 2"/>
+        </p>
 
-    <!--Właściciel-->
-    <p><input type="button" value="Włącz monitoring", onclick="location.href='@Url.Action("Start")'"/></p>
-    <p><input type="button" value="Wyłącz monitoring" , onclick="location.href='@Url.Action("Stop")'" /></p>
-</div>
+        <!--Właściciel-->
+        <p><input type="button" value="Włącz monitoring" , onclick="location.href = '@Url.Action("Start")'"/>
+        </p>
+        <p><input type="button" value="Wyłącz monitoring" , onclick="location.href = '@Url.Action("Stop")'"/>
+        </p>
+    </div>
+}
