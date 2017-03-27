@@ -194,29 +194,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201703151754488_user table.cs" />
-    <Compile Include="Migrations\201703151754488_user table.Designer.cs">
-      <DependentUpon>201703151754488_user table.cs</DependentUpon>
+    <Compile Include="Migrations\201703271741137_Initial identity.cs" />
+    <Compile Include="Migrations\201703271741137_Initial identity.Designer.cs">
+      <DependentUpon>201703271741137_Initial identity.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201703160830535_users info update.cs" />
-    <Compile Include="Migrations\201703160830535_users info update.Designer.cs">
-      <DependentUpon>201703160830535_users info update.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703210931322_user changes.cs" />
-    <Compile Include="Migrations\201703210931322_user changes.Designer.cs">
-      <DependentUpon>201703210931322_user changes.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703210957117_user changes2.cs" />
-    <Compile Include="Migrations\201703210957117_user changes2.Designer.cs">
-      <DependentUpon>201703210957117_user changes2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703211002013_user changes3.cs" />
-    <Compile Include="Migrations\201703211002013_user changes3.Designer.cs">
-      <DependentUpon>201703211002013_user changes3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703211051324_user changes4.cs" />
-    <Compile Include="Migrations\201703211051324_user changes4.Designer.cs">
-      <DependentUpon>201703211051324_user changes4.cs</DependentUpon>
+    <Compile Include="Migrations\201703271911393_Initial2 identity.cs" />
+    <Compile Include="Migrations\201703271911393_Initial2 identity.Designer.cs">
+      <DependentUpon>201703271911393_Initial2 identity.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -343,23 +327,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201703151754488_user table.resx">
-      <DependentUpon>201703151754488_user table.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201703271741137_Initial identity.resx">
+      <DependentUpon>201703271741137_Initial identity.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703160830535_users info update.resx">
-      <DependentUpon>201703160830535_users info update.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703210931322_user changes.resx">
-      <DependentUpon>201703210931322_user changes.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703210957117_user changes2.resx">
-      <DependentUpon>201703210957117_user changes2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703211002013_user changes3.resx">
-      <DependentUpon>201703211002013_user changes3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703211051324_user changes4.resx">
-      <DependentUpon>201703211051324_user changes4.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201703271911393_Initial2 identity.resx">
+      <DependentUpon>201703271911393_Initial2 identity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
