@@ -28,10 +28,10 @@
                             <asp:Label ID="lblDistName" runat="server" Text='<%#Eval("DistributorName") %>'/>
                         </td>
                         <td>
-                            <asp:Label ID="lblFuelVolume" runat="server" Text='<%#Eval("Volume") %>'/>
+                            <asp:Label ID="lblFuelVolume" runat="server" Text='<%# $"{Eval("Volume"):0.###}" %>'/>
                         </td>
                         <td>
-                            <asp:Label ID="lblTotalPrice" runat="server" Text='<%#Eval("TotalPrice") %>'/>
+                            <asp:Label ID="lblTotalPrice" runat="server" Text='<%# $"{Eval("TotalPrice"):0.##}" %>'/>
                         </td>
                         <td>
                             <asp:TextBox ID="txtNIP" runat="server" ToolTip="Wpisz NIP klienta"/>

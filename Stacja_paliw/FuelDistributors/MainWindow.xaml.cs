@@ -36,11 +36,11 @@ namespace FuelDistributors
             Distributors = new List<DistributorHandler>
             {
                 new DistributorHandler("Dystrybutor 1",             
-                    new FuelTank {FuelLevel = 100.0, PressureInTank = 2.1}),
+                    new FuelTank (100.0, 2.1, 5.2)),
                 new DistributorHandler("Dystrybutor 2", 
-                    new FuelTank {FuelLevel = 100.0, PressureInTank = 3.0}),
+                    new FuelTank (100.0, 3.0, 6.0)),
                 new DistributorHandler("Dystrybutor 3", 
-                    new FuelTank {FuelLevel = 80.0, PressureInTank = 1.5})
+                    new FuelTank (80.0, 1.5, 5.0))
             };
             DataContext = Distributors;
             Worker = new BackgroundWorker();
@@ -71,16 +71,19 @@ namespace FuelDistributors
 
         private void worker_DoWork(object sender, DoWorkEventArgs doWorkEventArgs, int distIndex)
         {
-            Distributors[distIndex].IsBusy = true;
+            var distributor = Distributors[distIndex];
+            distributor.IsBusy = true;
             while (!Worker.CancellationPending)
             {
-                Distributors[distIndex].Volume += DistributorHandler.FuelAtOnce;
-                Distributors[distIndex].TotalPrice += DistributorHandler.FuelAtOnce*D1Price;
+                distributor.Volume += DistributorHandler.FuelAtOnce;
+                distributor.TotalPrice += DistributorHandler.FuelAtOnce*D1Price;
+                distributor.FuelTank.FuelLevel -= DistributorHandler.FuelAtOnce;
+                distributor.FuelTank.GenerateParamethers();
                 _callback(Distributors);
                 System.Threading.Thread.Sleep(80);
             }
             doWorkEventArgs.Cancel = true;
-            Distributors[distIndex].IsBusy = false;
+            distributor.IsBusy = false;
         }
     }
 }

@@ -6,7 +6,7 @@ namespace FuelDistributors
 {
     public class DistributorHandler : INotifyPropertyChanged
     {
-        public const float FuelAtOnce = 0.015f;
+        public const float FuelAtOnce = 0.02f;
 
         private volatile float _volume;
         private volatile float _totalPrice;
@@ -66,6 +66,7 @@ namespace FuelDistributors
         {
             Volume = 0.0f;
             TotalPrice = 0.0f;
+            FuelTank.MakeSafe();
         }
     }
 }

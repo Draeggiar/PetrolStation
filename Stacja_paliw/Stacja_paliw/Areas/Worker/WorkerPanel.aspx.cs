@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Threading;
 using System.Web.UI.WebControls;
@@ -73,11 +74,14 @@ namespace Stacja_paliw.Areas.Worker
             {
                 if (item.ItemType == ListItemType.Item || item.ItemType == ListItemType.AlternatingItem)
                 {
+                    var lblDistName = (Label) item.FindControl("lblDistName");
                     var txtNip = (TextBox) item.FindControl("txtNIP");
                     var btnAcceptTransaction = (Button) item.FindControl("btnAcceptTransaction");
 
+                    #region --PriceLessThanZero--
+
                     if (
-                        _distributors.First(d => d.DistributorName == ((Label) item.FindControl("lblDistName")).Text)
+                        _distributors.First(d => d.DistributorName == lblDistName.Text)
                             .IsBusy
                         || ((Label) item.FindControl("lblTotalPrice")).Text == @"0")
                     {
@@ -89,6 +93,21 @@ namespace Stacja_paliw.Areas.Worker
                         txtNip.Attributes.Add("enabled", "enabled");
                         btnAcceptTransaction.Attributes.Add("visible", "visible");
                     }
+
+                    #endregion
+
+                    #region --ParamethersWarning--
+
+                    if (!_distributors.First(d => d.DistributorName == lblDistName.Text).FuelTank.IsSafe())
+                    {
+                        lblDistName.BackColor = Color.Coral;
+                    }
+                    else
+                    {
+                        lblDistName.BackColor = Color.White;
+                    }
+
+                    #endregion
                 }
             }
         }
