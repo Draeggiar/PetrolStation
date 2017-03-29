@@ -192,13 +192,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201703151754488_user table.cs" />
-    <Compile Include="Migrations\201703151754488_user table.Designer.cs">
-      <DependentUpon>201703151754488_user table.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703160830535_users info update.cs" />
-    <Compile Include="Migrations\201703160830535_users info update.Designer.cs">
-      <DependentUpon>201703160830535_users info update.cs</DependentUpon>
+    <Compile Include="Migrations\201703290819185_Initial.cs" />
+    <Compile Include="Migrations\201703290819185_Initial.Designer.cs">
+      <DependentUpon>201703290819185_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -349,18 +345,15 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201703151754488_user table.resx">
-      <DependentUpon>201703151754488_user table.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703160830535_users info update.resx">
-      <DependentUpon>201703160830535_users info update.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\MonitoringService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201703290819185_Initial.resx">
+      <DependentUpon>201703290819185_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
