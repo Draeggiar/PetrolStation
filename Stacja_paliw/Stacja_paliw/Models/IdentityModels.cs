@@ -2,6 +2,8 @@
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity;
 
 namespace Stacja_paliw.Models
 {
@@ -17,18 +19,15 @@ namespace Stacja_paliw.Models
             return userIdentity;
         }
 
-        //public virtual UserInfo MyUserInfo { get; set; }
-    }
-
-    public class User : IdentityUser
-    {
         public virtual UserInfo MyUserInfo { get; set; }
     }
-    
+
     public class UserInfo
     {
         public int Id { get; set; }
-        public virtual ApplicationUser UserId { get; set; }
+
+        public virtual ApplicationUser ApplicationUser { get; set; }
+
         public string FirstName { get; set; }
         public string LastName { get; set; }       
         public string Address { get; set; }
@@ -42,11 +41,21 @@ namespace Stacja_paliw.Models
         {
         }
 
-        public System.Data.Entity.DbSet<UserInfo> MyUserInfo { get; set; }
-
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
+        }
+
+        public System.Data.Entity.DbSet<UserInfo> MyUserInfo { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<ApplicationUser>()
+                .HasOptional(m => m.MyUserInfo)
+                .WithRequired(m => m.ApplicationUser)
+                .Map(p => p.MapKey("MyUserInfo_Id"));
         }
     }
 }

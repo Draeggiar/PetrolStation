@@ -6,6 +6,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Stacja_paliw.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System.Data.Entity;
 
 namespace Stacja_paliw.Controllers
 {
@@ -72,6 +74,46 @@ namespace Stacja_paliw.Controllers
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
             };
             return View(model);
+        }
+
+        public ActionResult ChangeUserInfo()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangeUserInfo([Bind(Include = "Id,FirstName,LastName,Address,NIP_Regon,MyUserInfo_Id")] UserInfo model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var context = new ApplicationDbContext();
+            var userId = User.Identity.GetUserId();
+            var user = context.Users.FirstOrDefault(x => x.Id.Equals(userId));
+
+            model.ApplicationUser = context.Users.FirstOrDefault(x => x.Id.Equals(userId));
+
+            var curr = context.MyUserInfo.FirstOrDefault(x => x.ApplicationUser.Id.Equals(userId));
+
+            if (curr != null)
+            {
+                curr.FirstName = model.FirstName;
+                curr.LastName = model.LastName;
+                curr.Address = model.Address;
+                curr.NIP_Regon = model.NIP_Regon;
+                UpdateModel(curr, "model");
+            }
+            else
+            {
+                context.MyUserInfo.Add(model);
+            }
+
+            context.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
         //
