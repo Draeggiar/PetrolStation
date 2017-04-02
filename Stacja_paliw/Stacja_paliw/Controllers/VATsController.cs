@@ -4,17 +4,55 @@ using System.Net;
 using System.Web.Mvc;
 using DomainModel;
 using PetrolStationDB;
+using Stacja_paliw.Models;
+using System;
 
 namespace Stacja_paliw.Controllers
 {
     public class VATsController : Controller
     {
         private PSDbContext db = new PSDbContext();
+        private ApplicationDbContext identityDb = new ApplicationDbContext();
 
         // GET: VATs
         public ActionResult Index()
         {
             return View(db.Vats.ToList());
+        }
+
+        public ActionResult Landing()
+        {
+            return View("LandingPage");
+        }
+
+        public ActionResult ExistingClient()
+        {
+            ViewBag.Existing = true;
+
+            return View("LandingPage");
+        }
+
+        [HttpPost]
+        public ActionResult SearchClient(string q)
+        {
+            var client = from p in identityDb.MyUserInfo select p;
+
+            var vat = from v in db.Vats select v;
+
+            if (!string.IsNullOrEmpty(q))
+            {
+                client = client.Where(x => x.NIP_Regon.ToString() == q);
+            }
+
+            ViewBag.NoVat = vat.FirstOrDefault().NoVAT;
+            ViewBag.Amount = vat.FirstOrDefault().ProductsAmountOrServices;
+            ViewBag.UPrice = vat.FirstOrDefault().UnitPrice;
+            ViewBag.Discount = vat.FirstOrDefault().Discount;
+            ViewBag.PriceNet = vat.FirstOrDefault().TotalPriceNet;
+            ViewBag.Tax = vat.FirstOrDefault().TaxRate;
+            ViewBag.Total = vat.FirstOrDefault().TotalPrice;
+
+            return View("VatPreview", client.ToList());
         }
 
         // GET: VATs/Details/5
@@ -43,16 +81,21 @@ namespace Stacja_paliw.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,NoVAT,Date,ClientFirstName,ClientLastName,Address,NIP,ProductsAmountOrServices,UnitPrice,Discount,TotalPriceNet,TaxRate,TotalPrice")] VAT vAT)
+        public ActionResult Create([Bind(Include = "Id,ClientFirstName,ClientLastName,Address,NIP,ProductsAmountOrServices,UnitPrice,Discount,TotalPriceNet,TaxRate,TotalPrice")] VAT Vat)
         {
             if (ModelState.IsValid)
             {
-                db.Vats.Add(vAT);
+                Vat.Date = DateTime.Today;
+
+                //FIX ME: Algorytm do generowania numeru faktury
+                Vat.NoVAT = 1;
+
+                db.Vats.Add(Vat);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(vAT);
+            return View(Vat);
         }
 
         // GET: VATs/Edit/5
