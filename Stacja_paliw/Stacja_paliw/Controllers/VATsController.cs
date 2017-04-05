@@ -6,6 +6,7 @@ using DomainModel;
 using PetrolStationDB;
 using Stacja_paliw.Models;
 using System;
+using Microsoft.AspNet.Identity;
 
 namespace Stacja_paliw.Controllers
 {
@@ -44,13 +45,21 @@ namespace Stacja_paliw.Controllers
                 client = client.Where(x => x.NIP_Regon.ToString() == q);
             }
 
-            ViewBag.NoVat = vat.FirstOrDefault().NoVAT;
-            ViewBag.Amount = vat.FirstOrDefault().ProductsAmountOrServices;
-            ViewBag.UPrice = vat.FirstOrDefault().UnitPrice;
-            ViewBag.Discount = vat.FirstOrDefault().Discount;
-            ViewBag.PriceNet = vat.FirstOrDefault().TotalPriceNet;
-            ViewBag.Tax = vat.FirstOrDefault().TaxRate;
-            ViewBag.Total = vat.FirstOrDefault().TotalPrice;
+            if (client.Any())
+            {
+                var test = client.Any();
+
+                var currVat = CreateAndPopulate(q, 10, 4.99m);
+
+                ViewBag.NoVat = currVat.NoVAT;
+                ViewBag.Amount = currVat.ProductsAmountOrServices;
+                ViewBag.UPrice = currVat.UnitPrice;
+                ViewBag.Discount = currVat.Discount;
+                ViewBag.PriceNet = currVat.TotalPriceNet;
+                ViewBag.Tax = currVat.TaxRate;
+                ViewBag.Total = currVat.TotalPrice;
+            }
+
 
             return View("VatPreview", client.ToList());
         }
@@ -96,6 +105,34 @@ namespace Stacja_paliw.Controllers
             }
 
             return View(Vat);
+        }
+
+        public VAT CreateAndPopulate(string NIP, decimal amount, decimal u_price)
+        {
+            var client = from p in identityDb.MyUserInfo select p;
+            client = client.Where(x => x.NIP_Regon.ToString() == NIP);
+
+            VAT Vat = new VAT();
+
+            //FIX ME: Algorytm do generowania numeru faktury
+            Vat.NoVAT = 1;
+
+            Vat.Date = DateTime.Now;
+            Vat.ClientFirstName = client.First().FirstName;
+            Vat.ClientLastName = client.First().LastName;
+            Vat.Address = client.First().Address;
+            Vat.NIP = Convert.ToInt64(NIP);
+            Vat.ProductsAmountOrServices = amount.ToString();
+            Vat.UnitPrice = u_price;
+            Vat.Discount = 0;
+            Vat.TotalPriceNet = amount * u_price;
+            Vat.TaxRate = 30;
+            Vat.TotalPrice = (amount * u_price) * 1.3m;
+
+            db.Vats.Add(Vat);
+            db.SaveChanges();
+
+            return Vat;
         }
 
         // GET: VATs/Edit/5
@@ -162,6 +199,18 @@ namespace Stacja_paliw.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult VatsHistory()
+        {
+            var userId = User.Identity.GetUserId();
+            var user = identityDb.Users.FirstOrDefault(x => x.Id.Equals(userId));
+
+            var vats = from p in db.Vats select p;
+
+            vats = vats.Where(x => x.NIP == user.MyUserInfo.NIP_Regon);
+
+            return View("VatsHistory", vats.ToList());
         }
     }
 }
