@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -11,12 +12,11 @@ namespace FuelDistributors
     /// </summary>
     public partial class MainWindow : Window
     {
-        public const float D1Price = 3.60f;
-
-        public List<DistributorHandler> Distributors { get; private set; }
-        public BackgroundWorker Worker;
+        public List<BackgroundWorker> Workers;
 
         private readonly DistributorsDataCallback _callback;
+
+        public List<DistributorHandler> Distributors { get; private set; }
 
         public MainWindow()
         { 
@@ -35,37 +35,44 @@ namespace FuelDistributors
         {
             Distributors = new List<DistributorHandler>
             {
-                new DistributorHandler("Dystrybutor 1",             
-                    new FuelTank (100.0, 2.1, 5.2)),
-                new DistributorHandler("Dystrybutor 2", 
-                    new FuelTank (100.0, 3.0, 6.0)),
-                new DistributorHandler("Dystrybutor 3", 
-                    new FuelTank (80.0, 1.5, 5.0))
+                new DistributorHandler("E95",             
+                    new FuelTank (100.0, 2.1, 5.2), 5.79f),
+                new DistributorHandler("E98", 
+                    new FuelTank (100.0, 3.0, 6.0), 5.99f),
+                new DistributorHandler("ON", 
+                    new FuelTank (80.0, 1.5, 5.0), 5.59f),
+                new DistributorHandler("LPG", 
+                    new FuelTank(80.0, 3.0, 5.0), 2.89f)
             };
             DataContext = Distributors;
-            Worker = new BackgroundWorker();
-            Worker.WorkerSupportsCancellation = true;
+            Workers = new List<BackgroundWorker>();
+            foreach (var distributor in Distributors)
+            {
+                Workers.Add(new BackgroundWorker {WorkerSupportsCancellation = true});
+            }
         }
 
         private void btnStart_Click(object sender, RoutedEventArgs e)
         {
             Button btn = sender as Button;
             int btnCode = btn.GetHashCode();
-            if (btnCode == d1Start.GetHashCode())
+            int btnIndex = Int32.Parse(btn.Name.Substring(1, 1));
+
+            if (btnCode == ((Button)FindName("d" + btnIndex + "Start")).GetHashCode())
             {
-                if (!Worker.IsBusy)
+                if (!Workers[btnIndex-1].IsBusy)
                 {
-                    Worker.DoWork += new DoWorkEventHandler((o, args) => worker_DoWork(o, args, 0));
-                    Worker.RunWorkerAsync();
-                    d1Start.Visibility = Visibility.Hidden;
-                    d1Stop.Visibility = Visibility.Visible;
+                    Workers[btnIndex - 1].DoWork += new DoWorkEventHandler((o, args) => worker_DoWork(o, args, btnIndex-1));
+                    Workers[btnIndex - 1].RunWorkerAsync();
+                    btn.Visibility = Visibility.Hidden;
+                    ((Button)FindName("d"+btnIndex+"Stop")).Visibility = Visibility.Visible;                
                 }
             }
-            else if (btnCode == d1Stop.GetHashCode())
+            else if (btnCode == ((Button)FindName("d" + btnIndex + "Stop")).GetHashCode())
             {
-                Worker.CancelAsync();
-                d1Start.Visibility = Visibility.Visible;
-                d1Stop.Visibility = Visibility.Hidden;
+                Workers[btnIndex - 1].CancelAsync();
+                ((Button)FindName("d" + btnIndex + "Start")).Visibility = Visibility.Visible;
+                btn.Visibility = Visibility.Hidden;
             }
         }
 
@@ -73,10 +80,10 @@ namespace FuelDistributors
         {
             var distributor = Distributors[distIndex];
             distributor.IsBusy = true;
-            while (!Worker.CancellationPending)
+            while (!Workers[distIndex].CancellationPending)
             {
                 distributor.Volume += DistributorHandler.FuelAtOnce;
-                distributor.TotalPrice += DistributorHandler.FuelAtOnce*D1Price;
+                distributor.TotalPrice += DistributorHandler.FuelAtOnce*distributor.DetailedPrice;
                 distributor.FuelTank.FuelLevel -= DistributorHandler.FuelAtOnce;
                 distributor.FuelTank.GenerateParamethers();
                 _callback(Distributors);

@@ -52,6 +52,7 @@ namespace Stacja_paliw.Areas.Worker
 
         protected void btnAcceptTransaction_OnClick(object sender, EventArgs e)
         {
+            //TODO rozpoznawanie konkretnego dystrybutora
             foreach (DistributorHandler distributor in _distributors)
             {
                 distributor.ResetDistributor();
@@ -98,6 +99,7 @@ namespace Stacja_paliw.Areas.Worker
 
                     #region --ParamethersWarning--
 
+                    //TODO różne rodzaje ostrzeżeń
                     if (!_distributors.First(d => d.DistributorName == lblDistName.Text).FuelTank.IsSafe())
                     {
                         lblDistName.BackColor = Color.Coral;
