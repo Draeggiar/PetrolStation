@@ -7,7 +7,7 @@
 
 <h3>@ViewBag.Authenticate</h3>
 <br/>
-@if (ViewBag.Authenticate != "Błąd autentykacji!")
+@if (ViewBag.Authenticate == "Poprawnie uwierzytelniono.")
 {
     <div>
         @if (ViewBag.ServiceStatus == "true")

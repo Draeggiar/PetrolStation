@@ -18,14 +18,19 @@ namespace Stacja_paliw.Areas.Worker.Controllers
                 ServiceClient.Open();
                 ViewBag.Authenticate = "Pomyślnie uwierzytelniono. Witaj " + User.Identity.Name;
                 ViewBag.ServiceStatus = ServiceClient.GetServiceStatus().MonitoringStarted.ToString().ToLower();
+                ViewBag.Authenticate = "Poprawnie uwierzytelniono.";
             }
             catch (System.ServiceModel.EndpointNotFoundException e)
             {
                 ViewBag.Authenticate = "Nie znaleziono serwisu, sprawdź czy jest włączony";
-            }           
-            catch (InvalidOperationException e)
+            }
+            catch (System.ServiceModel.Security.SecurityNegotiationException e)
             {
                 ViewBag.Authenticate = "Błąd autentykacji!";
+            }
+            catch (System.InvalidOperationException e)
+            {
+                ViewBag.Authenticate = "Błąd konfiguracji.";
             }
 
             return View();
