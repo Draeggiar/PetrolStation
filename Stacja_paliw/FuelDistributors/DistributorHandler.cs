@@ -42,18 +42,21 @@ namespace FuelDistributors
 
         public string DistributorName { get;  }
 
+        public float DetailedPrice { get; }
+
         public bool IsBusy{ get; set; }
 
         public FuelTank FuelTank { get;}
 
         #endregion
 
-        public DistributorHandler(string distributorName, FuelTank tank)
+        public DistributorHandler(string distributorName, FuelTank tank, float price)
         {
             Volume = 0.0f;
             TotalPrice = 0.0f;
             DistributorName = distributorName;
             FuelTank = tank;
+            DetailedPrice = price;
         }
 
         [NotifyPropertyChangedInvocator]

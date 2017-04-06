@@ -5,10 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FuelDistributors"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="700">
+        Title="MainWindow" Height="600" Width="800"
+        ResizeMode="NoResize">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.5*"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
@@ -22,12 +24,14 @@
             <RowDefinition Height="0.3*"></RowDefinition>
         </Grid.RowDefinitions>
         
-        <Label Content="Dystrybutor 1" Grid.Column="1" Grid.Row="0"
-               HorizontalAlignment="Center" VerticalAlignment="Center"
-               Margin="0, 0, 0, 30"/>
-        <Label Name="d1Price" Grid.Column="1" Grid.Row="0" Content="3.60"
+        <Label Name="d1Name"  Grid.Column="1" Grid.Row="0"
+               HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0, 0, 0, 30" 
+               Background="Green" Foreground="White"
+               Content="{Binding Path=[0].DistributorName}"/>
+        <Label Name="d1Price" Grid.Column="1" Grid.Row="0"
                HorizontalAlignment="Center" VerticalAlignment="Center" 
-               Margin="0, 0, 0, -30"/>
+               Margin="0, 0, 0, -30" 
+               Content="{Binding Path=[0].DetailedPrice}"/>
         <Button Name="d1Start" Grid.Column="1" Grid.Row="1" Content="Start"
                 Click="btnStart_Click"/>
         <Button Name="d1Stop" Grid.Column="1" Grid.Row="2" Content="Stop"
@@ -41,12 +45,67 @@
                    HorizontalAlignment="Center" ContentStringFormat="{}{0:0.##}"/>
         </ListView>
 
-        <Label Content="Dystrybutor 2" Grid.Column="2" Grid.Row="0"></Label>
-        <Button Name="d2Start" Grid.Column="2" Grid.Row="1" Content="Start"></Button>
-        <Button Name="d2Stop" Grid.Column="2" Grid.Row="2" Content="Stop"></Button>
+        <Label Name="d2Name"  Grid.Column="2" Grid.Row="0"
+               HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0, 0, 0, 30" 
+               Background="DarkGreen" Foreground="White"
+               Content="{Binding Path=[1].DistributorName}"/>
+        <Label Name="d2Price" Grid.Column="2" Grid.Row="0"
+               HorizontalAlignment="Center" VerticalAlignment="Center" 
+               Margin="0, 0, 0, -30"
+               Content="{Binding Path=[1].DetailedPrice}"/>
+        <Button Name="d2Start" Grid.Column="2" Grid.Row="1" Content="Start"
+                Click="btnStart_Click"/>
+        <Button Name="d2Stop" Grid.Column="2" Grid.Row="2" Content="Stop"
+                Click="btnStart_Click" Visibility="Hidden"/>
+        <ListView Grid.Column="2" Grid.Row="3" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+            <Label Content="Ilość paliwa[dm3]:"/>
+            <Label Name="d2Volume" Content="{Binding Path=[1].Volume, UpdateSourceTrigger=PropertyChanged}"
+                   HorizontalAlignment="Center" ContentStringFormat="{}{0:0.##0}"/>
+            <Label Content="Cena[zł]:"/>
+            <Label Name="d2TotalPrice" Content="{Binding Path=[1].TotalPrice, UpdateSourceTrigger=PropertyChanged}" 
+                   HorizontalAlignment="Center" ContentStringFormat="{}{0:0.##}"/>
+        </ListView>
 
-        <Label Content="Dystrybutor 3" Grid.Column="3" Grid.Row="0"></Label>
-        <Button Name="d3Start" Grid.Column="3" Grid.Row="1" Content="Start"></Button>
-        <Button Name="d3Stop" Grid.Column="3" Grid.Row="2" Content="Stop"></Button>
+        <Label Name="d3Name"  Grid.Column="3" Grid.Row="0"
+               HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0, 0, 0, 30" 
+               Background="Black" Foreground="White"
+               Content="{Binding Path=[2].DistributorName}"/>
+        <Label Name="d3Price" Grid.Column="3" Grid.Row="0"
+               HorizontalAlignment="Center" VerticalAlignment="Center" 
+               Margin="0, 0, 0, -30"
+               Content="{Binding Path=[2].DetailedPrice}"/>
+        <Button Name="d3Start" Grid.Column="3" Grid.Row="1" Content="Start"
+                Click="btnStart_Click"/>
+        <Button Name="d3Stop" Grid.Column="3" Grid.Row="2" Content="Stop"
+                Click="btnStart_Click" Visibility="Hidden"/>
+        <ListView Grid.Column="3" Grid.Row="3" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+            <Label Content="Ilość paliwa[dm3]:"/>
+            <Label Name="d3Volume" Content="{Binding Path=[2].Volume, UpdateSourceTrigger=PropertyChanged}"
+                   HorizontalAlignment="Center" ContentStringFormat="{}{0:0.##0}"/>
+            <Label Content="Cena[zł]:"/>
+            <Label Name="d3TotalPrice" Content="{Binding Path=[2].TotalPrice, UpdateSourceTrigger=PropertyChanged}" 
+                   HorizontalAlignment="Center" ContentStringFormat="{}{0:0.##}"/>
+        </ListView>
+
+        <Label Name="d4Name"  Grid.Column="4" Grid.Row="0"
+               HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0, 0, 0, 30" 
+               Background="Bisque"
+               Content="{Binding Path=[3].DistributorName}"/>
+        <Label Name="d4Price" Grid.Column="4" Grid.Row="0"
+               HorizontalAlignment="Center" VerticalAlignment="Center" 
+               Margin="0, 0, 0, -30"
+               Content="{Binding Path=[3].DetailedPrice}"/>
+        <Button Name="d4Start" Grid.Column="4" Grid.Row="1" Content="Start"
+                Click="btnStart_Click"/>
+        <Button Name="d4Stop" Grid.Column="4" Grid.Row="2" Content="Stop"
+                Click="btnStart_Click" Visibility="Hidden"/>
+        <ListView Grid.Column="4" Grid.Row="3" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+            <Label Content="Ilość paliwa[dm3]:"/>
+            <Label Name="d4Volume" Content="{Binding Path=[3].Volume, UpdateSourceTrigger=PropertyChanged}"
+                   HorizontalAlignment="Center" ContentStringFormat="{}{0:0.##0}"/>
+            <Label Content="Cena[zł]:"/>
+            <Label Name="d4TotalPrice" Content="{Binding Path=[3].TotalPrice, UpdateSourceTrigger=PropertyChanged}" 
+                   HorizontalAlignment="Center" ContentStringFormat="{}{0:0.##}"/>
+        </ListView>
     </Grid>
 </Window>
