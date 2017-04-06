@@ -1,0 +1,22 @@
+﻿@model Stacja_paliw.Models.UserInfo
+@{
+    ViewBag.Title = "_GetClientPartial";
+}
+
+@using (Html.BeginForm("SearchClient", "VATs", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container-fluid">
+
+        <h4>Podaj NIP klienta</h4>
+
+        <div class=".col-md-12">
+            @Html.TextBox("q", null, new { @class = "form-control", @id = "client-search", @placeholder = "Client NIP" })
+        </div>
+        <div>
+            <input type="submit" value="Generuj fakture" class="btn btn-default btn-lg" />
+        </div>
+
+    </div>
+}

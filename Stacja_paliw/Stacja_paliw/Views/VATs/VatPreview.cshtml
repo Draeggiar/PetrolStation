@@ -1,0 +1,77 @@
+﻿@model IEnumerable<Stacja_paliw.Models.UserInfo>
+
+@{
+    ViewBag.Title = "VatPreview";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>SearchClient</title>
+</head>
+<body>
+
+    @if(!Model.Any())
+    {
+        <br /><br />
+        <h2>Nie ma clienta o podanym numerze NIP</h2>
+    }
+
+    @foreach (var item in Model)
+    {
+        <br /><br />
+        <div class="col-md-8 row">
+            <div class="col-md-6">Numer faktury</div>
+            <div class="col-md-6">@Html.Raw(ViewBag.NoVat)</div>
+        </div>
+        <div class="col-md-8 row">
+            <div class="col-md-6">Data</div>
+            <div class="col-md-6">@Html.Raw(DateTime.Now)</div>
+        </div>
+        <div class="col-md-8 row">
+            <div class="col-md-6">NIP</div>
+            <div class="col-md-6">@Html.DisplayFor(modelItem => item.NIP_Regon)</div>
+        </div>
+        <div class="col-md-8 row">
+            <div class="col-md-6">Imię</div>
+            <div class="col-md-6">@Html.DisplayFor(modelItem => item.FirstName)</div>
+        </div>
+        <div class="col-md-8 row">
+            <div class="col-md-6">Nazwisko</div>
+            <div class="col-md-6">@Html.DisplayFor(modelItem => item.LastName)</div>
+        </div>
+        <div class="col-md-8 row">
+            <div class="col-md-6">Adres</div>
+            <div class="col-md-6">@Html.DisplayFor(modelItem => item.Address)</div>
+        </div>
+        <div class="col-md-8 row">
+            <div class="col-md-6">Ilość produktu</div>
+            <div class="col-md-6">@Html.Raw(ViewBag.Amount)</div>
+        </div>
+        <div class="col-md-8 row">
+            <div class="col-md-6">Cena jednostkowa</div>
+            <div class="col-md-6">@Html.Raw(ViewBag.UPrice)</div>
+        </div>
+        <div class="col-md-8 row">
+            <div class="col-md-6">Zniżka</div>
+            <div class="col-md-6">@Html.Raw(ViewBag.Discount)</div>
+        </div>
+        <div class="col-md-8 row">
+            <div class="col-md-6">Cena netto</div>
+            <div class="col-md-6">@Html.Raw(ViewBag.PriceNet)</div>
+        </div>
+        <div class="col-md-8 row">
+            <div class="col-md-6">Podatek</div>
+            <div class="col-md-6">@Html.Raw(ViewBag.Tax)</div>
+        </div>
+        <div class="col-md-8 row">
+            <div class="col-md-6">Cena brutto</div>
+            <div class="col-md-6">@Html.Raw(ViewBag.Total)</div>
+        </div>
+
+    }
+
+</body>
+</html>
