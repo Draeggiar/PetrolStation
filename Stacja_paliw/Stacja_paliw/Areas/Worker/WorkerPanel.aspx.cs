@@ -8,6 +8,7 @@ using FuelDistributors;
 
 namespace Stacja_paliw.Areas.Worker
 {
+    //TODO podgląd aktualnego stanu parametrów
     public partial class WorkerPanel : System.Web.UI.Page
     {
         #region ---Fields---
@@ -23,7 +24,7 @@ namespace Stacja_paliw.Areas.Worker
             if (!IsPostBack)
             {
                 Thread t = new Thread(() =>
-                {                    
+                {
                     MainWindow mainWindow = new MainWindow(GetDistributorsData);
                     mainWindow.Show();
                     System.Windows.Threading.Dispatcher.Run();
@@ -52,11 +53,35 @@ namespace Stacja_paliw.Areas.Worker
 
         protected void btnAcceptTransaction_OnClick(object sender, EventArgs e)
         {
-            //TODO rozpoznawanie konkretnego dystrybutora
-            foreach (DistributorHandler distributor in _distributors)
+            var senderButton = sender as Button;
+
+            foreach (RepeaterItem item in rptTransactions.Items)
             {
-                distributor.ResetDistributor();
-                //TODO drukowanie faktury
+                if (item.ItemType == ListItemType.Item || item.ItemType == ListItemType.AlternatingItem)
+                {
+                    var btnAcceptTransaction1 = (Button)item.FindControl("btnAcceptTransaction1");
+                    var btnAcceptTransaction2 = (Button)item.FindControl("btnAcceptTransaction1");
+                    if (senderButton.GetHashCode() == btnAcceptTransaction1.GetHashCode())
+                    {
+                        var lblDistName = (Label)item.FindControl("lblDistName");
+                        var lblVolume = (Label)item.FindControl("lblFuelVolume");
+                        var lblTotalPrice = (Label)item.FindControl("lblTotalPrice");
+
+                        Response.Redirect("/Transaction/Faktura/?Vlolume=" + lblVolume.Text +
+                                         "&Total_price=" + lblTotalPrice.Text);
+                        _distributors.First(d => d.DistributorName == lblDistName.Text).ResetDistributor();
+                    }
+                    else if (senderButton.GetHashCode() == btnAcceptTransaction2.GetHashCode())
+                    {
+                        var lblDistName = (Label)item.FindControl("lblDistName");
+                        var lblVolume = (Label)item.FindControl("lblFuelVolume");
+                        var lblTotalPrice = (Label)item.FindControl("lblTotalPrice");
+
+                        Response.Redirect("/Transaction/Rachunek/?Vlolume=" + lblVolume.Text +
+                                         "&Total_price=" + lblTotalPrice.Text);
+                        _distributors.First(d => d.DistributorName == lblDistName.Text).ResetDistributor();
+                    }
+                }
             }
         }
 
@@ -75,24 +100,24 @@ namespace Stacja_paliw.Areas.Worker
             {
                 if (item.ItemType == ListItemType.Item || item.ItemType == ListItemType.AlternatingItem)
                 {
-                    var lblDistName = (Label) item.FindControl("lblDistName");
-                    var txtNip = (TextBox) item.FindControl("txtNIP");
-                    var btnAcceptTransaction = (Button) item.FindControl("btnAcceptTransaction");
+                    var lblDistName = (Label)item.FindControl("lblDistName");
+                    var btnAcceptTransaction1 = (Button)item.FindControl("btnAcceptTransaction1");
+                    var btnAcceptTransaction2 = (Button)item.FindControl("btnAcceptTransaction2");
 
-                    #region --PriceLessThanZero--
+                    #region --PriceLessThanZeroOrBusy--
 
                     if (
                         _distributors.First(d => d.DistributorName == lblDistName.Text)
                             .IsBusy
-                        || ((Label) item.FindControl("lblTotalPrice")).Text == @"0")
+                        || ((Label)item.FindControl("lblTotalPrice")).Text == @"0")
                     {
-                        txtNip.Attributes.Add("disabled", "disabled");
-                        btnAcceptTransaction.Attributes.Add("hidden", "hidden");
+                        btnAcceptTransaction1.Attributes.Add("hidden", "hidden");
+                        btnAcceptTransaction2.Attributes.Add("hidden", "hidden");
                     }
                     else
                     {
-                        txtNip.Attributes.Add("enabled", "enabled");
-                        btnAcceptTransaction.Attributes.Add("visible", "visible");
+                        btnAcceptTransaction1.Attributes.Add("visible", "visible");
+                        btnAcceptTransaction2.Attributes.Add("visible", "visible");
                     }
 
                     #endregion
@@ -102,7 +127,7 @@ namespace Stacja_paliw.Areas.Worker
                     //TODO różne rodzaje ostrzeżeń
                     if (!_distributors.First(d => d.DistributorName == lblDistName.Text).FuelTank.IsSafe())
                     {
-                        lblDistName.BackColor = Color.Coral;
+                        lblDistName.BackColor = Color.Coral;             
                     }
                     else
                     {

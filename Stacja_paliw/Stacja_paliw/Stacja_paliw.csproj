@@ -175,6 +175,8 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Worker\Controllers\TransactionController.cs" />
+    <Compile Include="Areas\Worker\Models\TransactionData.cs" />
     <Compile Include="Areas\Worker\WorkerAreaRegistration.cs" />
     <Compile Include="Areas\Worker\WorkerPanel.aspx.cs">
       <DependentUpon>WorkerPanel.aspx</DependentUpon>
@@ -229,6 +231,7 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Areas\Worker\Views\web.config" />
+    <Content Include="Areas\Worker\Views\Transaction\Rachunek.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
@@ -329,7 +332,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Worker\Models\" />
     <Folder Include="Areas\Worker\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>

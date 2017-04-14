@@ -1,14 +1,15 @@
-﻿<%@ Page Title="Panel pracownika" Language="C#" CodeBehind="WorkerPanel.aspx.cs" MasterPageFile="~/Views/Shared/_WebFormsMasterPage.master" Inherits="Stacja_paliw.Areas.Worker.WorkerPanel"%>
+﻿<%@ Page Title="Panel pracownika" Language="C#" CodeBehind="WorkerPanel.aspx.cs" MasterPageFile="~/Views/Shared/_WebFormsMasterPage.master" Inherits="Stacja_paliw.Areas.Worker.WorkerPanel" %>
 
 <asp:Content ID="MainContent" runat="server" ContentPlaceHolderID="MainContentPlaceHolder">
-    <asp:ScriptManager runat="server"/>
+    <asp:ScriptManager runat="server" />
     <asp:Timer runat="server" ID="timUpdater" Interval="1000" />
-    
+
     <a href='http://<%:HttpContext.Current.Request.Url.Authority %>/Worker/Monitoring' class="btn-link">Centrum monitoringu</a>
-    <br/>
+    <br />
+
     <asp:UpdatePanel runat="server">
         <Triggers>
-            <asp:AsyncPostBackTrigger ControlID="timUpdater" EventName="Tick"/>
+            <asp:AsyncPostBackTrigger ControlID="timUpdater" EventName="Tick" />
         </Triggers>
         <ContentTemplate>
             <asp:Repeater ID="rptTransactions" runat="server" EnableViewState="True">
@@ -28,16 +29,21 @@
                             <asp:Label ID="lblDistName" runat="server" Text='<%#Eval("DistributorName") %>'/>
                         </td>
                         <td>
-                            <asp:Label ID="lblFuelVolume" runat="server" Text='<%# $"{Eval("Volume"):0.###}" %>'/>
+                            <asp:Label ID="lblFuelVolume" runat="server" Text='<%# $"{Eval("Volume"):0.###}" %>' />
                         </td>
                         <td>
-                            <asp:Label ID="lblTotalPrice" runat="server" Text='<%# $"{Eval("TotalPrice"):0.##}" %>'/>
+                            <asp:Label ID="lblTotalPrice" runat="server" Text='<%# $"{Eval("TotalPrice"):0.##}" %>' />
                         </td>
                         <td>
-                            <asp:TextBox ID="txtNIP" runat="server" ToolTip="Wpisz NIP klienta"/>
+                            <asp:Button ID="btnAcceptTransaction1" runat="server" OnClick="btnAcceptTransaction_OnClick" Text="Faktura" />
                         </td>
                         <td>
-                            <asp:Button ID="btnAcceptTransaction" runat="server" OnClick="btnAcceptTransaction_OnClick" Text="Zatwierdź transakcję"/>
+                            <asp:Button ID="btnAcceptTransaction2" runat="server" OnClick="btnAcceptTransaction_OnClick" Text="Rachunek" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            
                         </td>
                     </tr>
                 </ItemTemplate>
