@@ -13,16 +13,16 @@ namespace Stacja_paliw.Areas.Worker.Controllers
         // GET: Worker/Transaction
         public ActionResult Faktura(double volume, double totalPrice)
         {
-
+            TransactionData td = new TransactionData(volume, totalPrice);
+            RedirectToAction("Landing", "VATs", td);
             return View();
         }
 
         public ActionResult Rachunek(double volume, double totalPrice)
         {
             TransactionData td = new TransactionData(volume, totalPrice);
-            //TODO zamiana widoku na pdf 
-
-            return View();
+            
+            return View(td);
         }
     }
 }

@@ -21,7 +21,7 @@ namespace Stacja_paliw.Controllers
             return View(db.Vats.ToList());
         }
 
-        public ActionResult Landing()
+        public ActionResult Landing(Areas.Worker.Models.TransactionData td)
         {
             return View("LandingPage");
         }
