@@ -16,7 +16,7 @@ namespace Stacja_paliw.Areas.Worker.Controllers
                 ViewBag.Authenticate = "Pomyślnie uwierzytelniono. Witaj " + User.Identity.Name;
                 ViewBag.ServiceStatus = ServiceClient.GetServiceStatus().MonitoringStarted.ToString().ToLower();
             }            
-            catch (Exception e)
+            catch (Exception)
             {
                 ViewBag.Authenticate = "Błąd autentykacji!";
             }
