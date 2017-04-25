@@ -14,8 +14,7 @@ namespace Stacja_paliw.Areas.Worker.Controllers
         public ActionResult Faktura(double volume, double totalPrice)
         {
             TransactionData td = new TransactionData(volume, totalPrice);
-            RedirectToAction("Landing", "VATs", td);
-            return View();
+            return RedirectToAction("Landing", "VATs", td);
         }
 
         public ActionResult Rachunek(double volume, double totalPrice)

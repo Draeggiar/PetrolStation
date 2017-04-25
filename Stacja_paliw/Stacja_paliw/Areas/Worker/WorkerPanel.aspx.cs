@@ -67,8 +67,8 @@ namespace Stacja_paliw.Areas.Worker
                         var lblVolume = (Label)item.FindControl("lblFuelVolume");
                         var lblTotalPrice = (Label)item.FindControl("lblTotalPrice");
 
-                        Response.Redirect("/Transaction/Faktura/?Vlolume=" + lblVolume.Text +
-                                         "&Total_price=" + lblTotalPrice.Text);
+                        Response.Redirect("/Vats/Landing/?volume=" + lblVolume.Text +
+                                         "&totalPrice=" + lblTotalPrice.Text);
                         _distributors.First(d => d.DistributorName == lblDistName.Text).ResetDistributor();
                     }
                     else if (senderButton.GetHashCode() == btnAcceptTransaction2.GetHashCode())
@@ -77,8 +77,8 @@ namespace Stacja_paliw.Areas.Worker
                         var lblVolume = (Label)item.FindControl("lblFuelVolume");
                         var lblTotalPrice = (Label)item.FindControl("lblTotalPrice");
 
-                        Response.Redirect("/Transaction/Rachunek/?Vlolume=" + lblVolume.Text +
-                                         "&Total_price=" + lblTotalPrice.Text);
+                        Response.Redirect("/Transaction/Rachunek/?volume=" + lblVolume.Text +
+                                         "&totalPrice=" + lblTotalPrice.Text);
                         _distributors.First(d => d.DistributorName == lblDistName.Text).ResetDistributor();
                     }
                 }

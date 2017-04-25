@@ -7,6 +7,7 @@ using PetrolStationDB;
 using Stacja_paliw.Models;
 using System;
 using Microsoft.AspNet.Identity;
+using Stacja_paliw.Areas.Worker.Models;
 
 namespace Stacja_paliw.Controllers
 {
@@ -21,8 +22,14 @@ namespace Stacja_paliw.Controllers
             return View(db.Vats.ToList());
         }
 
-        public ActionResult Landing(Areas.Worker.Models.TransactionData td)
+        public ActionResult Landing(double volume, double totalPrice)
         {
+            Areas.Worker.Models.TransactionData td = new TransactionData(volume, totalPrice);
+
+            ViewBag.TransactionData = td;
+
+            ViewBag.Vol = volume;
+
             return View("LandingPage");
         }
 
