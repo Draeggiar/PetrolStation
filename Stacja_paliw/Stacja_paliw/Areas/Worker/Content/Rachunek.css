@@ -1,0 +1,22 @@
+﻿body {
+    width: 100%;
+    text-align: center;
+}
+
+.header{
+    margin: 40px;
+}
+
+.content {
+    font-size: 20px;
+    margin: 20px;
+}
+
+.content table {
+    width: 40%;
+    margin-left: 27%;
+}
+
+.footer {
+    font-style: italic;
+}

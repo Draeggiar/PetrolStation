@@ -4,9 +4,40 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div>
-    <h2>Stacja paliw SPB</h2>
-    @Html.DisplayFor(model => model.Volume)
-    @Html.DisplayFor(model => model.TotalPrice);
+@section style{
+    <link href="~/Areas/Worker/Content/Rachunek.css" rel="stylesheet" type="text/css" />
+}
+
+<div class="header">
+    <h1>Stacja paliw SPB</h1>
+</div>
+<div class="content">
+    <table>
+        <tr>
+            <td>
+                <b>Ilość paliwa: </b>
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Volume)
+            </td>
+            <td>
+                l
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Do zapłaty: </b>
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.TotalPrice)
+            </td>
+            <td>
+                zł
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="footer">
+    <h4>Dziękujemy i zapraszamy ponownie</h4>
 </div>
 

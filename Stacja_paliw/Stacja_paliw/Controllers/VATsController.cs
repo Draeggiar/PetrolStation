@@ -24,7 +24,7 @@ namespace Stacja_paliw.Controllers
 
         public ActionResult Landing(double volume, double totalPrice)
         {
-            Areas.Worker.Models.TransactionData td = new TransactionData(volume, totalPrice);
+            TransactionData td = new TransactionData(volume, totalPrice);
 
             ViewBag.TransactionData = td;
 

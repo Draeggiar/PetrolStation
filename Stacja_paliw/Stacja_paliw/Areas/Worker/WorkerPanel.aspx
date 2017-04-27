@@ -19,7 +19,7 @@
                             <th>Dystrybutor</th>
                             <th>Ilość paliwa</th>
                             <th>Do zapłaty</th>
-                            <th>NIP</th>
+                            <th>Akcje</th>
                             <th></th>
                         </tr>
                 </HeaderTemplate>
@@ -39,11 +39,6 @@
                         </td>
                         <td>
                             <asp:Button ID="btnAcceptTransaction2" runat="server" OnClick="btnAcceptTransaction_OnClick" Text="Rachunek" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            
                         </td>
                     </tr>
                 </ItemTemplate>
