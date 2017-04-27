@@ -49,9 +49,6 @@
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="DayPilot.Web.Mvc">
-      <HintPath>..\..\DayPilot.Web.Mvc.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -65,7 +62,6 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
@@ -179,8 +175,6 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Areas\Worker\Controllers\TransactionController.cs" />
-    <Compile Include="Areas\Worker\Models\TransactionData.cs" />
     <Compile Include="Areas\Worker\WorkerAreaRegistration.cs" />
     <Compile Include="Areas\Worker\WorkerPanel.aspx.cs">
       <DependentUpon>WorkerPanel.aspx</DependentUpon>
@@ -190,23 +184,17 @@
       <DependentUpon>WorkerPanel.aspx</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\CarWashController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Areas\Worker\Controllers\MonitoringController.cs" />
     <Compile Include="Controllers\PricesController.cs" />
     <Compile Include="Controllers\VATsController.cs" />
-    <Compile Include="DAL\CalendarEvents.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CalendarEvents.dbml</DependentUpon>
-    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201704060633315_Intial.cs" />
-    <Compile Include="Migrations\201704060633315_Intial.Designer.cs">
-      <DependentUpon>201704060633315_Intial.cs</DependentUpon>
+    <Compile Include="Migrations\201703290819185_Initial.cs" />
+    <Compile Include="Migrations\201703290819185_Initial.Designer.cs">
+      <DependentUpon>201703290819185_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -221,40 +209,28 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\StacjaDB.mdf" />
-    <Content Include="App_Data\StacjaDB_log.ldf">
-      <DependentUpon>StacjaDB.mdf</DependentUpon>
-    </Content>
-    <Content Include="Areas\Worker\Content\Rachunek.css" />
     <Content Include="Areas\Worker\WorkerPanel.aspx" />
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Home.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Areas\Worker\Views\web.config" />
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-theme.min.css.map" />
-    <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="Areas\Worker\Views\web.config" />
-    <Content Include="Areas\Worker\Views\Transaction\Rachunek.cshtml" />
-    <Content Include="DAL\CalendarEvents.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>CalendarEvents.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
-    <Content Include="Scripts\daypilot-all.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.js" />
@@ -350,9 +326,10 @@
     <Content Include="Views\VATs\VatPreview.cshtml" />
     <Content Include="Views\Manage\ChangeuserInfo.cshtml" />
     <Content Include="Views\VATs\VatsHistory.cshtml" />
-    <Content Include="Views\CarWash\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Areas\Worker\Models\" />
     <Folder Include="Areas\Worker\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
@@ -383,15 +360,9 @@
     <WCFMetadataStorage Include="Service References\MonitoringService\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="DAL\CalendarEvents.dbml.layout">
-      <DependentUpon>CalendarEvents.dbml</DependentUpon>
-    </None>
-    <EmbeddedResource Include="Migrations\201704060633315_Intial.resx">
-      <DependentUpon>201704060633315_Intial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201703290819185_Initial.resx">
+      <DependentUpon>201703290819185_Initial.cs</DependentUpon>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
