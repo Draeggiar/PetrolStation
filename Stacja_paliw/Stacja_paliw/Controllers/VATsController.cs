@@ -212,5 +212,17 @@ namespace Stacja_paliw.Controllers
 
             return View("VatsHistory", vats.ToList());
         }
+
+        public PartialViewResult PartialHistory()
+        {
+            var userId = User.Identity.GetUserId();
+            var user = identityDb.Users.FirstOrDefault(x => x.Id.Equals(userId));
+
+            var vats = from p in db.Vats select p;
+
+            vats = vats.Where(x => x.NIP == user.MyUserInfo.NIP_Regon);
+
+            return PartialView("~/Views/Home/Index.cshtml", vats.ToList());
+        }
     }
 }

@@ -3,47 +3,32 @@
     ViewBag.Title = "_RoleDropdownsPartial";
 }
 
-@if (Request.IsAuthenticated && User.IsInRole("Admin"))
+@if (Request.IsAuthenticated && (User.IsInRole("Client") || User.IsInRole("Admin")))
 {
-    <ul class="nav navbar-nav ml-auto">
+    <ul class="nav navbar-nav justify-content-start">
         <li class="dropdown nav-item">
             <a href="#" data-toggle="dropdown" role="button" aria-haspopup="true"
-               aria-expanded="false" class="dropdown-toggle nav-link">Admin Isle<span class="caret"></span></a>
+               aria-expanded="false" class="dropdown-toggle nav-link">Strefa Klienta<span class="caret"></span></a>
             <ul class="dropdown-menu">
-                <li class="dropdown-item">
-                    <a href="#">Manage users</a>
-                </li>
+                 @*<li class="dropdown-item">@Html.ActionLink("Cennik", "IndexLast", "Prices")</li>*@
+                <li class="dropdown-item">@Html.ActionLink("Faktury Vat", "VatsHistory", "VATs")</li>
+                <li class="dropdown-item">Myjnia</li>
             </ul>
         </li>
     </ul>
 }
 
-@if (Request.IsAuthenticated && (User.IsInRole("Client") || User.IsInRole("Employee")
-        || User.IsInRole("Owner") || User.IsInRole("Admin")))
+@if (Request.IsAuthenticated && (User.IsInRole("Employee") || User.IsInRole("Admin")))
 {
-    <ul class="nav navbar-nav">
-        <li class="dropdown">
-            <a href = "#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle">Strefa Klienta<span class="caret"></span></a>
+    <ul class="nav navbar-nav justify-content-start">
+        <li class="dropdown nav-item">
+            <a href="#" data-toggle="dropdown" role="button" aria-haspopup="true"
+               aria-expanded="false" class="dropdown-toggle nav-link">Narzędzia<span class="caret"></span></a>
             <ul class="dropdown-menu">
-                @*<li>@Html.ActionLink("Cennik", "IndexLast", "Prices")</li>*@
-                <li>@Html.ActionLink("Faktury Vat", "VatsHistory", "VATs")</li>
-
-
-                <li>Myjnia</li>
-            </ul>
-        </li>
-    </ul>     
-}
-
-@if (Request.IsAuthenticated && (User.IsInRole("Employee")
-                || User.IsInRole("Owner") || User.IsInRole("Admin")))
-{
-    <ul class="nav navbar-nav">
-        <li class="dropdown">
-            <a href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle">Narzędzia<span class="caret"></span></a>
-            <ul class="dropdown-menu">
-                <li>@Html.ActionLink("Zarządzanie monitoringiem", "Index", "WorkerPanel", new { area = "Worker" }, null)</li>
-                <li>@Html.ActionLink("Faktura VAT", "Landing", "VATs")</li>
+                <li class="dropdown-item">
+                    @Html.ActionLink("Zarządzanie monitoringiem", "Index", "WorkerPanel",new { area = "Worker" }, null)
+                </li>
+                <li class="dropdown-item">@Html.ActionLink("Faktura VAT", "Landing", "VATs")</li>
             </ul>
         </li>
     </ul>
@@ -51,12 +36,28 @@
 
 @if (Request.IsAuthenticated && (User.IsInRole("Owner") || User.IsInRole("Admin")))
 {
-    <ul class="nav navbar-nav">
-        <li class="dropdown">
-            <a href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle">Narzędzia szefa<span class="caret"></span></a>
+    <ul class="nav navbar-nav justify-content-start">
+        <li class="dropdown nav-item">
+            <a href="#" data-toggle="dropdown" role="button" aria-haspopup="true"
+               aria-expanded="false" class="dropdown-toggle nav-link">Narzędzia szefa<span class="caret"></span></a>
             <ul class="dropdown-menu">
-                <li>Raporty</li>
-                <li>Dostawy</li>
+                <li class="dropdown-item">Raporty</li>
+                <li class="dropdown-item">Dostawy</li>
+            </ul>
+        </li>
+    </ul>
+}
+
+@if (Request.IsAuthenticated && User.IsInRole("Admin"))
+{
+    <ul class="nav navbar-nav justify-content-end">
+        <li class="dropdown nav-item">
+            <a href="#" data-toggle="dropdown" role="button" aria-haspopup="true"
+               aria-expanded="false" class="dropdown-toggle nav-link">Admin Isle<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li class="dropdown-item">
+                    <a href="#">Manage users</a>
+                </li>
             </ul>
         </li>
     </ul>
