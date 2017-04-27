@@ -1,0 +1,29 @@
+﻿@model IEnumerable<DomainModel.VAT>
+
+@{
+    ViewBag.Title = "_HistoryPartial";
+}
+
+<table class="table table-sm table-hover">
+    <thead class="thead-default">
+        <tr>
+            <th>#</th>
+            <th>Vat No</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th scope="row">1</th>
+                <td>@Html.DisplayFor(modelItem => item.NoVAT)</td>
+                <td>@Html.DisplayFor(modelItem => item.ClientFirstName)</td>
+                <td>@Html.DisplayFor(modelItem => item.ClientLastName)</td>
+                <td>@Html.DisplayFor(modelItem => item.TotalPrice)</td>
+            </tr>
+        }
+    </tbody>
+</table>	

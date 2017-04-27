@@ -6,51 +6,39 @@ namespace Stacja_paliw.Areas.Worker.Controllers
 {
     public class MonitoringController : Controller
     {
-        private MonitoringServiceClient ServiceClient { get; set; }
-
-        [Route("MonitoringPanel")]
+        private static readonly MonitoringService.MonitoringServiceClient ServiceClient = new MonitoringServiceClient();
+        // GET: Monitoring
         public ActionResult Index()
         {
             try
             {
-                if (ServiceClient == null)
-                    ServiceClient = new MonitoringServiceClient();
                 ServiceClient.Open();
                 ViewBag.Authenticate = "Pomyślnie uwierzytelniono. Witaj " + User.Identity.Name;
                 ViewBag.ServiceStatus = ServiceClient.GetServiceStatus().MonitoringStarted.ToString().ToLower();
-                ViewBag.Authenticate = "Poprawnie uwierzytelniono.";
-            }
-            catch (System.ServiceModel.EndpointNotFoundException e)
-            {
-                ViewBag.Authenticate = "Nie znaleziono serwisu, sprawdź czy jest włączony";
-            }
-            catch (System.ServiceModel.Security.SecurityNegotiationException e)
+            }            
+            catch (Exception)
             {
                 ViewBag.Authenticate = "Błąd autentykacji!";
-            }
-            catch (System.InvalidOperationException e)
-            {
-                ViewBag.Authenticate = "Błąd konfiguracji.";
             }
 
             return View();
         }
 
-        protected ActionResult View(int cameraID)
+        public ActionResult View(int cameraID)
         {
             ViewBag.Message = ServiceClient.ViewCamera(cameraID);
             ViewBag.ServiceStatus = ServiceClient.GetServiceStatus().MonitoringStarted.ToString().ToLower();
             return View("Index");
         }
 
-        protected ActionResult Start()
+        public ActionResult Start()
         {
             ViewBag.Message = ServiceClient.StartMonitoring();
             ViewBag.ServiceStatus = ServiceClient.GetServiceStatus().MonitoringStarted.ToString().ToLower();           
             return View("Index");
         }
 
-        protected ActionResult Stop()
+        public ActionResult Stop()
         {
             ViewBag.Message = ServiceClient.StopMonitoring();
             ViewBag.ServiceStatus = ServiceClient.GetServiceStatus().MonitoringStarted.ToString().ToLower();
