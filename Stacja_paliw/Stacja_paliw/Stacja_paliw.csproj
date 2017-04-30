@@ -35,6 +35,24 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <IncludeIisSettings>true</IncludeIisSettings>
+    <PublishDatabaseSettings>
+      <Objects>
+        <ObjectGroup Name="DefaultConnection-Deployment" Order="1" xmlns="">
+          <Destination Path="" />
+          <Object Type="DbFullSql">
+            <PreSource Path="Data Source=tcp:slamnation.database.windows.net,1433%3bInitial Catalog=ProjZesp_Identity%3bPersist Security Info=False%3bUser ID=slamnation%3bPassword=!ProjZespHaslo!%3bConnect Timeout=30%3bEncrypt=True%3bTrustServerCertificate=False" ScriptSchema="True" ScriptData="False" CopyAllFullTextCatalogs="False" DriDefaults="True" />
+            <Source Path="obj\Debug\AutoScripts\DefaultConnection-Deployment_SchemaOnly.sql" Transacted="True" />
+          </Object>
+        </ObjectGroup>
+        <ObjectGroup Name="PerolStationDB-Deployment" Order="2" xmlns="">
+          <Destination Path="" />
+          <Object Type="DbFullSql">
+            <PreSource Path="Data Source=tcp:slamnation01.database.windows.net,1433%3bInitial Catalog=ProjZesp_Model%3bPersist Security Info=False%3bUser ID=slamnation%3bPassword=!ProjZespHaslo!%3bConnect Timeout=30%3bEncrypt=True%3bTrustServerCertificate=False" ScriptSchema="True" ScriptData="False" CopyAllFullTextCatalogs="False" DriDefaults="True" />
+            <Source Path="obj\Debug\AutoScripts\PerolStationDB-Deployment_SchemaOnly.sql" Transacted="True" />
+          </Object>
+        </ObjectGroup>
+      </Objects>
+    </PublishDatabaseSettings>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -196,9 +214,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201704271705487_fix.cs" />
-    <Compile Include="Migrations\201704271705487_fix.Designer.cs">
-      <DependentUpon>201704271705487_fix.cs</DependentUpon>
+    <Compile Include="Migrations\201704302003551_Initial_Azure.cs" />
+    <Compile Include="Migrations\201704302003551_Initial_Azure.Designer.cs">
+      <DependentUpon>201704302003551_Initial_Azure.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704302057308_Azure.cs" />
+    <Compile Include="Migrations\201704302057308_Azure.Designer.cs">
+      <DependentUpon>201704302057308_Azure.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -367,8 +389,11 @@
     <WCFMetadataStorage Include="Service References\MonitoringService\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201704271705487_fix.resx">
-      <DependentUpon>201704271705487_fix.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201704302003551_Initial_Azure.resx">
+      <DependentUpon>201704302003551_Initial_Azure.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704302057308_Azure.resx">
+      <DependentUpon>201704302057308_Azure.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

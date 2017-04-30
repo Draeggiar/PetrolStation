@@ -6,7 +6,7 @@ namespace PetrolStationDB
     public class PSDbContext : DbContext
     {
 
-        public PSDbContext() : base("PetrolStationDB")
+        public PSDbContext() : base("PerolStationDB")
         {
 
         }
