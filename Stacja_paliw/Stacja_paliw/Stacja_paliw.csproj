@@ -35,6 +35,24 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <IncludeIisSettings>true</IncludeIisSettings>
+    <PublishDatabaseSettings>
+      <Objects>
+        <ObjectGroup Name="DefaultConnection-Deployment" Order="1" xmlns="">
+          <Destination Path="" />
+          <Object Type="DbFullSql">
+            <PreSource Path="Data Source=tcp:slamnation.database.windows.net,1433%3bInitial Catalog=ProjZesp_Identity%3bPersist Security Info=False%3bUser ID=slamnation%3bPassword=!ProjZespHaslo!%3bConnect Timeout=30%3bEncrypt=True%3bTrustServerCertificate=False" ScriptSchema="True" ScriptData="False" CopyAllFullTextCatalogs="False" DriDefaults="True" />
+            <Source Path="obj\Debug\AutoScripts\DefaultConnection-Deployment_SchemaOnly.sql" Transacted="True" />
+          </Object>
+        </ObjectGroup>
+        <ObjectGroup Name="PerolStationDB-Deployment" Order="2" xmlns="">
+          <Destination Path="" />
+          <Object Type="DbFullSql">
+            <PreSource Path="Data Source=tcp:slamnation01.database.windows.net,1433%3bInitial Catalog=ProjZesp_Model%3bPersist Security Info=False%3bUser ID=slamnation%3bPassword=!ProjZespHaslo!%3bConnect Timeout=30%3bEncrypt=True%3bTrustServerCertificate=False" ScriptSchema="True" ScriptData="False" CopyAllFullTextCatalogs="False" DriDefaults="True" />
+            <Source Path="obj\Debug\AutoScripts\PerolStationDB-Deployment_SchemaOnly.sql" Transacted="True" />
+          </Object>
+        </ObjectGroup>
+      </Objects>
+    </PublishDatabaseSettings>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -65,7 +83,6 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
@@ -179,7 +196,6 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Areas\Worker\Controllers\TransactionController.cs" />
     <Compile Include="Areas\Worker\Models\TransactionData.cs" />
     <Compile Include="Areas\Worker\WorkerAreaRegistration.cs" />
     <Compile Include="Areas\Worker\WorkerPanel.aspx.cs">
@@ -190,23 +206,21 @@
       <DependentUpon>WorkerPanel.aspx</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\CarWashController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Areas\Worker\Controllers\MonitoringController.cs" />
     <Compile Include="Controllers\PricesController.cs" />
     <Compile Include="Controllers\VATsController.cs" />
-    <Compile Include="DAL\CalendarEvents.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CalendarEvents.dbml</DependentUpon>
-    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201704060633315_Intial.cs" />
-    <Compile Include="Migrations\201704060633315_Intial.Designer.cs">
-      <DependentUpon>201704060633315_Intial.cs</DependentUpon>
+    <Compile Include="Migrations\201704302003551_Initial_Azure.cs" />
+    <Compile Include="Migrations\201704302003551_Initial_Azure.Designer.cs">
+      <DependentUpon>201704302003551_Initial_Azure.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704302057308_Azure.cs" />
+    <Compile Include="Migrations\201704302057308_Azure.Designer.cs">
+      <DependentUpon>201704302057308_Azure.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -221,12 +235,6 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\StacjaDB.mdf" />
-    <Content Include="App_Data\StacjaDB_log.ldf">
-      <DependentUpon>StacjaDB.mdf</DependentUpon>
-    </Content>
-    <Content Include="Areas\Worker\Content\Rachunek.css" />
-    <Content Include="Areas\Worker\WorkerPanel.aspx" />
     <Content Include="Areas\Worker\WorkerPanel.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
@@ -239,35 +247,15 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Areas\Worker\Views\web.config" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
-    <Content Include="favicon.ico" />
-    <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
-	<Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
-    <Content Include="Areas\Worker\Views\web.config" />
-    <Content Include="Areas\Worker\Views\Transaction\Rachunek.cshtml" />
-    <Content Include="DAL\CalendarEvents.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>CalendarEvents.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
-    <Content Include="Scripts\daypilot-all.min.js" />
-	 <Content Include="Resource\button_loyal.png" />
+    <Content Include="Resource\button_loyal.png" />
     <Content Include="Resource\button_myjnia.png" />
     <Content Include="Resource\button_vat.png" />
     <Content Include="Scripts\bootstrap.js" />
@@ -367,9 +355,10 @@
     <Content Include="Views\VATs\VatPreview.cshtml" />
     <Content Include="Views\Manage\ChangeuserInfo.cshtml" />
     <Content Include="Views\VATs\VatsHistory.cshtml" />
-    <Content Include="Views\CarWash\Index.cshtml" />
+    <Content Include="Views\VATs\_HistoryPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\" />
     <Folder Include="Areas\Worker\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
@@ -400,15 +389,12 @@
     <WCFMetadataStorage Include="Service References\MonitoringService\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="DAL\CalendarEvents.dbml.layout">
-      <DependentUpon>CalendarEvents.dbml</DependentUpon>
-    </None>
-    <EmbeddedResource Include="Migrations\201704060633315_Intial.resx">
-      <DependentUpon>201704060633315_Intial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201704302003551_Initial_Azure.resx">
+      <DependentUpon>201704302003551_Initial_Azure.cs</DependentUpon>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+    <EmbeddedResource Include="Migrations\201704302057308_Azure.resx">
+      <DependentUpon>201704302057308_Azure.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
