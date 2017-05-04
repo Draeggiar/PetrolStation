@@ -258,6 +258,13 @@
     <Content Include="Resource\button_loyal.png" />
     <Content Include="Resource\button_myjnia.png" />
     <Content Include="Resource\button_vat.png" />
+    <Content Include="Resource\diesel.png" />
+    <Content Include="Resource\Kamil.png" />
+    <Content Include="Resource\lpg.png" />
+    <Content Include="Resource\pb95.png" />
+    <Content Include="Resource\pb98.png" />
+    <Content Include="Resource\Tadek.png" />
+    <Content Include="Resource\Wojtek.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
