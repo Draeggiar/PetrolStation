@@ -10,7 +10,6 @@
 <div class="container-fluid">
     <div class="form-group .col-md-12">
         <div class="col-md-4">
-            @Html.Raw(ViewBag.Vol)
             @Ajax.ActionLink("Istniejący klient", "ExistingClient", "Vat", new AjaxOptions(), new {@class = "btn btn-default btn-lg"})
         </div>
         <div class="col-md-4">

@@ -8,6 +8,7 @@ using Stacja_paliw.Models;
 using System;
 using Microsoft.AspNet.Identity;
 using Stacja_paliw.Areas.Worker.Models;
+using System.Collections.Generic;
 
 namespace Stacja_paliw.Controllers
 {
@@ -19,7 +20,15 @@ namespace Stacja_paliw.Controllers
         // GET: VATs
         public ActionResult Index()
         {
-            return View(db.Vats.ToList());
+            var _vats = new List<VAT>();
+
+            try
+            {
+                _vats = db.Vats.ToList();
+            }
+            catch (Exception e) { }
+
+            return View(_vats);
         }
 
         public ActionResult Landing(double volume, double totalPrice)
@@ -222,14 +231,20 @@ namespace Stacja_paliw.Controllers
 
         public PartialViewResult PartialHistory()
         {
-            var userId = User.Identity.GetUserId();
-            var user = identityDb.Users.FirstOrDefault(x => x.Id.Equals(userId));
+            
+                var userId = User.Identity.GetUserId();
+                var user = identityDb.Users.FirstOrDefault(x => x.Id.Equals(userId));
 
-            var vats = from p in db.Vats select p;
+                var vats = from p in db.Vats select p;
+                var _list = new List<VAT>();
+            try
+            {
+                vats = vats.Where(x => x.NIP == user.MyUserInfo.NIP_Regon);
+                _list = vats.ToList();
+            }
+            catch (Exception e) { }
 
-            vats = vats.Where(x => x.NIP == user.MyUserInfo.NIP_Regon);
-
-            return PartialView("~/Views/Home/Index.cshtml", vats.ToList());
+            return PartialView("_HistoryPartial", _list);
         }
     }
 }

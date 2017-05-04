@@ -1,4 +1,4 @@
-﻿@model DomainModel.Price
+﻿@*@model IEnumerable<DomainModel.VAT>*@
 
 @{
     ViewBag.Title = "Home Page";
@@ -8,30 +8,42 @@
     <link href="~/Content/Home.css" rel="stylesheet" type="text/css" />
     }
 
+@section scripts {
+    <script src="~/Scripts/jquery-3.1.1.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script type="text/javascript">
+        $("#btn-1-img").click(function () {
+        $.get('@Url.Action("PartialHistory", "VATs")', {}, function (response) {
+            $("#VatsPartial").html(response);
+            });
+        });
+    </script>
+    }
+
 <div class="container main">
     <div class="row">
         <div class="col-6 col-sm-3 col-md-3">
             <figure class="figure">
-                <img src="http://petro-hurt.pl/wp-content/uploads/2014/03/pb95.gif" class="figure-img img-fluid img-responsive center-block" alt="Pb95">
-                <figcaption class="figure-caption text-center font-weight-bold price">@Html.DisplayFor(Model => Model.Pb95)</figcaption>
+                <img src="~/Resource/pb95.png" class="figure-img img-fluid img-responsive center-block" alt="Pb95">
+                <figcaption class="figure-caption text-center font-weight-bold price">@Html.Raw(ViewBag.pb95)</figcaption>
             </figure>
         </div>
         <div class="col-6 col-sm-3 col-md-3">
             <figure class="figure">
-                <img src="http://www.petroenergia.pl/sites/all/themes/business/images/pb98.gif" class="figure-img img-fluid img-responsive center-block" alt="Pb98">
-                <figcaption class="figure-caption text-center font-weight-bold price">@Html.DisplayFor(Model => Model.Pb98)</figcaption>
+                <img src="~/Resource/pb98.png" class="figure-img img-fluid img-responsive center-block" alt="Pb98">
+                <figcaption class="figure-caption text-center font-weight-bold price">@Html.Raw(ViewBag.pb98)</figcaption>
             </figure>
         </div>
         <div class="col-6 col-sm-3 col-md-3">
             <figure class="figure">
-                <img src="http://www.stacjaoktan.pl/uploads/images/ON%20diesel.png" class="figure-img img-fluid img-responsive center-block" alt="On">
-                <figcaption class="figure-caption text-center font-weight-bold price">@Html.DisplayFor(Model => Model.On)</figcaption>
+                <img src="~/Resource/diesel.png" class="figure-img img-fluid img-responsive center-block" alt="On">
+                <figcaption class="figure-caption text-center font-weight-bold price">@Html.Raw(ViewBag.diesel)</figcaption>
             </figure>
         </div>
         <div class="col-6 col-sm-3 col-md-3">
             <figure class="figure">
-                <img src="https://lh6.ggpht.com/tnP5VzQeEUjie6NRqPuijp49Brz0Z8PqouUOEZGc48IP908FOOWQ1VCKasdWRUUqjiw=w300" class="figure-img img-fluid img-responsive center-block" alt="Lpg">
-                <figcaption class="figure-caption text-center font-weight-bold price">@Html.DisplayFor(Model => Model.Lpg)</figcaption>
+                <img src="~/Resource/lpg.png" class="figure-img img-fluid img-responsive center-block" alt="Lpg">
+                <figcaption class="figure-caption text-center font-weight-bold price">@Html.Raw(ViewBag.lpg)</figcaption>
             </figure>
         </div>
     </div>
@@ -43,13 +55,13 @@
         </ol>
         <div class="carousel-inner" role="listbox">
             <div class="carousel-item active">
-                <img class="d-block img-fluid" src="http://placehold.it/1280x500" alt="First slide">
+                <img class="d-block img-fluid" src="~/Resource/Wojtek.png" alt="First slide">
             </div>
             <div class="carousel-item">
-                <img class="d-block img-fluid" src="http://placehold.it/1280x500" alt="Second slide">
+                <img class="d-block img-fluid" src="~/Resource/Tadek.png" alt="Second slide">
             </div>
             <div class="carousel-item">
-                <img class="d-block img-fluid" src="http://placehold.it/1280x500" alt="Third slide">
+                <img class="d-block img-fluid" src="~/Resource/Kamil.png" alt="Third slide">
             </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -64,12 +76,12 @@
     <div id="nav-btns" class="btn-group btn-group-justified" role="group" aria-label="...">
         <div class="btn-group" role="group">
             <button id="btn-1" type="button" class="btn btn-default btn-scale">
-                <img src="~/Resource/button_vat.png" onclick="location.href='@Url.Action("VatsHistory", "VATs")'" alt="..." class="btn-img img-fluid">
+                <img id="btn-1-img" src="~/Resource/button_vat.png" alt="..." class="btn-img img-fluid">
             </button>
         </div>
         <div class="btn-group" role="group">
             <button id="btn-2" type="button" class="btn btn-default btn-scale">
-                <img src="~/Resource/button_loyal.png" onclick="location.href='@Url.Action("PartialHistory", "VATs")'" alt="..." class="btn-img img-fluid">
+                <img src="~/Resource/button_loyal.png" alt="..." class="btn-img img-fluid">
             </button>
         </div>
         <div class="btn-group" role="group">
@@ -78,4 +90,5 @@
             </button>
         </div>
     </div>
+    <div id="VatsPartial"></div>
 </div>
