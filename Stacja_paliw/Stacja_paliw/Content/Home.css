@@ -1,0 +1,59 @@
+﻿.main {
+  padding: 40px;
+}
+
+.price {
+	color: #000000;
+}
+
+.btn-default {
+	border: 0 none !important;
+	box-shadow: none !important;
+}
+
+.btn-img {
+	padding: 10%;
+}
+
+#nav-btns {
+	width: 100% !important;
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
+#btn-1 {
+	background-color: #FFCC66;
+}
+
+#btn-2 {
+	background-color: #FFD67A;
+}
+
+#btn-3 {
+	background-color: #FFE394;
+}
+
+.carousel {
+  width: auto;
+  height: auto;
+}
+
+.btn-scale img{
+  -webkit-transition: all 0.5s linear;
+          transition: all 0.5s linear;
+  -webkit-transform: scale3d(1, 1, 1);
+          transform: scale3d(1, 1, 1);
+}
+
+.btn-scale:hover img{
+  -webkit-transform: scale3d(1.2, 1.2, 1);
+          transform: scale3d(1.2, 1.2, 1);
+}
+
+figure img{
+    width: 128px !important;
+    height: 128px !important;
+
+    max-width: 192px !important;
+    max-height: 192px !important;
+}
