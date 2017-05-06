@@ -222,6 +222,10 @@
     <Compile Include="Migrations\201704302057308_Azure.Designer.cs">
       <DependentUpon>201704302057308_Azure.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705060851355_add_loyality.cs" />
+    <Compile Include="Migrations\201705060851355_add_loyality.Designer.cs">
+      <DependentUpon>201705060851355_add_loyality.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -363,6 +367,8 @@
     <Content Include="Views\Manage\ChangeuserInfo.cshtml" />
     <Content Include="Views\VATs\VatsHistory.cshtml" />
     <Content Include="Views\VATs\_HistoryPartial.cshtml" />
+    <Content Include="Views\Home\_PointsPartial.cshtml" />
+    <Content Include="Views\Home\Terms.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -401,6 +407,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704302057308_Azure.resx">
       <DependentUpon>201704302057308_Azure.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705060851355_add_loyality.resx">
+      <DependentUpon>201705060851355_add_loyality.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

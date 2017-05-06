@@ -20,6 +20,7 @@ namespace Stacja_paliw.Models
         }
 
         public virtual UserInfo MyUserInfo { get; set; }
+        public virtual LoyalityStatus LoyalStatus { get; set; } 
     }
 
     public class UserInfo
@@ -32,6 +33,16 @@ namespace Stacja_paliw.Models
         public string LastName { get; set; }       
         public string Address { get; set; }
         public long NIP_Regon { get; set; }
+    }
+
+    public class LoyalityStatus
+    {
+        public int Id { get; set; }
+
+        public virtual ApplicationUser ApplicationUser { get; set; }
+
+        public int LifetimePts { get; set; }
+        public int CurrPts { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -47,6 +58,7 @@ namespace Stacja_paliw.Models
         }
 
         public System.Data.Entity.DbSet<UserInfo> MyUserInfo { get; set; }
+        public System.Data.Entity.DbSet<LoyalityStatus> LoyalStatus { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -56,6 +68,11 @@ namespace Stacja_paliw.Models
                 .HasOptional(m => m.MyUserInfo)
                 .WithRequired(m => m.ApplicationUser)
                 .Map(p => p.MapKey("MyUserInfo_Id"));
+
+            modelBuilder.Entity<ApplicationUser>()
+                .HasOptional(m => m.LoyalStatus)
+                .WithRequired(m => m.ApplicationUser)
+                .Map(p => p.MapKey("AspUser_Id"));
         }
     }
 }

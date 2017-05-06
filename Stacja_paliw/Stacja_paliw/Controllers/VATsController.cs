@@ -31,13 +31,10 @@ namespace Stacja_paliw.Controllers
             return View(_vats);
         }
 
-        public ActionResult Landing(double volume, double totalPrice)
+        public ActionResult Landing(double volume, string fuelType)
         {
-            TransactionData td = new TransactionData(volume, totalPrice);
-
-            ViewBag.TransactionData = td;
-
             ViewBag.Vol = volume;
+            ViewBag.Fuel = fuelType;
 
             return View("LandingPage");
         }
@@ -53,8 +50,11 @@ namespace Stacja_paliw.Controllers
         public ActionResult SearchClient(string q)
         {
             var client = from p in identityDb.MyUserInfo select p;
-
             var vat = from v in db.Vats select v;
+
+            decimal volume = Convert.ToDecimal(TempData["Volume"]);
+            string fuel = Convert.ToString(TempData["Fuel"]);
+            decimal u_price = GetPrice(fuel);
 
             if (!string.IsNullOrEmpty(q))
             {
@@ -65,15 +65,16 @@ namespace Stacja_paliw.Controllers
             {
                 var test = client.Any();
 
-                var currVat = CreateAndPopulate(q, 10, 4.99m);
+                var currVat = CreateAndPopulate(q, volume, u_price);
+                AddPoints(fuel, volume);
 
                 ViewBag.NoVat = currVat.NoVAT;
                 ViewBag.Amount = currVat.ProductsAmountOrServices;
                 ViewBag.UPrice = currVat.UnitPrice;
                 ViewBag.Discount = currVat.Discount;
-                ViewBag.PriceNet = currVat.TotalPriceNet;
+                ViewBag.PriceNet = Math.Round(currVat.TotalPriceNet, 2);
                 ViewBag.Tax = currVat.TaxRate;
-                ViewBag.Total = currVat.TotalPrice;
+                ViewBag.Total = Math.Round(currVat.TotalPrice, 2);
             }
 
 
@@ -223,20 +224,30 @@ namespace Stacja_paliw.Controllers
             var user = identityDb.Users.FirstOrDefault(x => x.Id.Equals(userId));
 
             var vats = from p in db.Vats select p;
+            var _vats = new List<VAT>();
 
             vats = vats.Where(x => x.NIP == user.MyUserInfo.NIP_Regon);
 
-            return View("VatsHistory", vats.ToList());
+            try
+            {
+                _vats = vats.ToList();
+            }
+            catch(Exception e)
+            {
+                return View(e.Message.ToString());
+            }
+
+            return View("VatsHistory", _vats);
         }
 
         public PartialViewResult PartialHistory()
-        {
-            
-                var userId = User.Identity.GetUserId();
-                var user = identityDb.Users.FirstOrDefault(x => x.Id.Equals(userId));
+        {          
+            var userId = User.Identity.GetUserId();
+            var user = identityDb.Users.FirstOrDefault(x => x.Id.Equals(userId));
 
-                var vats = from p in db.Vats select p;
-                var _list = new List<VAT>();
+            var vats = from p in db.Vats select p;
+            var _list = new List<VAT>();
+
             try
             {
                 vats = vats.Where(x => x.NIP == user.MyUserInfo.NIP_Regon);
@@ -245,6 +256,87 @@ namespace Stacja_paliw.Controllers
             catch (Exception e) { }
 
             return PartialView("_HistoryPartial", _list);
+        }
+
+        public decimal GetPrice(string fuel)
+        {
+            decimal u_price;
+            var prices = from p in db.Prices select p;
+
+            switch (fuel)
+            {
+                case "E95":
+                    u_price = prices.FirstOrDefault().Pb95;
+                    break;
+                case "E98":
+                    u_price = prices.FirstOrDefault().Pb98;
+                    break;
+                case "ON":
+                    u_price = prices.FirstOrDefault().On;
+                    break;
+                case "LPG":
+                    u_price = prices.FirstOrDefault().Lpg;
+                    break;
+                default:
+                    u_price = 10; break;
+            }
+
+            return u_price;
+        }
+
+        public void AddPoints(string fuel, decimal volume)
+        {
+            var context = new ApplicationDbContext();
+            var userId = User.Identity.GetUserId();
+            var user = context.Users.FirstOrDefault(x => x.Id.Equals(userId));
+
+            var curr = context.LoyalStatus.FirstOrDefault(x => x.ApplicationUser.Id.Equals(userId));
+            var _points = from p in db.Loyality select p;
+
+            try
+            {
+                int points;
+                int multiply = Convert.ToInt32(Math.Floor(volume));
+
+                switch (fuel)
+                {
+                    case "E95":
+                        points = _points.FirstOrDefault().PbOnPtsReciv * multiply;
+                        break;
+                    case "E98":
+                        points = _points.FirstOrDefault().PbOnPtsReciv * multiply;
+                        break;
+                    case "ON":
+                        points = _points.FirstOrDefault().PbOnPtsReciv * multiply;
+                        break;
+                    case "LPG":
+                        points = _points.FirstOrDefault().LPGPtsReciv * multiply;
+                        break;
+                    default:
+                        points = 0; break;
+                }
+
+                if (curr != null)
+                {
+                    curr.CurrPts += points;
+                    curr.LifetimePts += points;
+
+                    UpdateModel(curr, "model");
+                }
+                else
+                {
+                    curr = new LoyalityStatus();
+
+                    curr.CurrPts = points;
+                    curr.LifetimePts = points;
+                    curr.ApplicationUser = user;
+
+                    context.LoyalStatus.Add(curr);
+                }
+
+                context.SaveChanges();
+            }
+            catch (Exception e) { }
         }
     }
 }

@@ -68,7 +68,7 @@ namespace Stacja_paliw.Areas.Worker
                         var lblTotalPrice = (Label)item.FindControl("lblTotalPrice");
 
                         Response.Redirect("/Vats/Landing/?volume=" + lblVolume.Text +
-                                         "&totalPrice=" + lblTotalPrice.Text);
+                                         "&fuelType=" + lblDistName.Text);
                         _distributors.First(d => d.DistributorName == lblDistName.Text).ResetDistributor();
                     }
                     else if (senderButton.GetHashCode() == btnAcceptTransaction2.GetHashCode())

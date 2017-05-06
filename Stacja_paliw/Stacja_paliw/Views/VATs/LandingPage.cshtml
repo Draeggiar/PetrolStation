@@ -3,26 +3,25 @@
     ViewBag.Title = "LandingPage";
 }
 
-<h2>Wystaw fakturę VAT dla</h2>
+@{TempData["Volume"] = ViewBag.Vol;}
+@{TempData["Fuel"] = ViewBag.Fuel;}
 
 <br /><br />
 
 <div class="container-fluid">
-    <div class="form-group .col-md-12">
+    @*<div class="form-group .col-md-12">
         <div class="col-md-4">
             @Ajax.ActionLink("Istniejący klient", "ExistingClient", "Vat", new AjaxOptions(), new {@class = "btn btn-default btn-lg"})
         </div>
         <div class="col-md-4">
             <input type="submit" value="Nowy klient" class="btn btn-default btn-lg" />
         </div>
-    </div>
+    </div>*@
 
-    <br /><br /><br /><br />
-
-    @if(ViewBag.Existing == true)
-    {
+    @*@if(ViewBag.Existing == true)
+    {*@
         <div>
             @Html.Partial("_GetClientPartial")
         </div>
-    }
+    @*}*@
 </div>
