@@ -83,6 +83,7 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
@@ -207,11 +208,17 @@
       <DependentUpon>WorkerPanel.aspx</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CarWashController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Areas\Worker\Controllers\MonitoringController.cs" />
     <Compile Include="Controllers\PricesController.cs" />
     <Compile Include="Controllers\VATsController.cs" />
+    <Compile Include="DAL\CalendarEvents.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CalendarEvents.dbml</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -259,6 +266,11 @@
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="Areas\Worker\Views\Transaction\Rachunek.cshtml" />
+    <Content Include="DAL\CalendarEvents.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>CalendarEvents.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Resource\button_loyal.png" />
@@ -273,6 +285,7 @@
     <Content Include="Resource\Wojtek.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\daypilot-all.min.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.js" />
@@ -405,6 +418,9 @@
     <WCFMetadataStorage Include="Service References\MonitoringService\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="DAL\CalendarEvents.dbml.layout">
+      <DependentUpon>CalendarEvents.dbml</DependentUpon>
+    </None>
     <EmbeddedResource Include="Migrations\201704302003551_Initial_Azure.resx">
       <DependentUpon>201704302003551_Initial_Azure.cs</DependentUpon>
     </EmbeddedResource>
@@ -414,6 +430,9 @@
     <EmbeddedResource Include="Migrations\201705060851355_add_loyality.resx">
       <DependentUpon>201705060851355_add_loyality.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

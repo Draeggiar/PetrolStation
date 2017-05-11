@@ -30,11 +30,10 @@ namespace Stacja_paliw.Controllers
         class Dpm : DayPilotMonth
         {
             private string DataUserField { get; set; }
-            private CalendarEventsDataContext _db;
 
             protected override void OnInit(InitArgs initArgs)
             {
-                _db = new CalendarEventsDataContext();
+                CalendarEventsDataContext db = new CalendarEventsDataContext();
                 //Events = from ev in _db.CarWashMonthlyEvents select ev;
 
                 //DataIdField = "Id";
@@ -48,13 +47,14 @@ namespace Stacja_paliw.Controllers
 
             protected override void OnFinish()
             {
+                CalendarEventsDataContext db = new CalendarEventsDataContext();
                 // only load the data if an update was requested by an Update() call
                 if (UpdateType == CallBackUpdateType.None)
                 {
                     return;
                 }
 
-                Events = from ev in _db.CarWashMonthlyEvents select ev;
+                Events = from ev in db.CarWashMonthlyEvents select ev;
 
                 DataIdField = "Id";
                 DataTextField = "Text";
@@ -67,16 +67,18 @@ namespace Stacja_paliw.Controllers
 
             protected override void OnEventMove(EventMoveArgs e)
             {
+                CalendarEventsDataContext db = new CalendarEventsDataContext();
+
                 try
                 {
                     var toBeResized =
-                        (from ev in _db.CarWashMonthlyEvents where ev.Id == Convert.ToInt32(e.Id) select ev).First();
+                        (from ev in db.CarWashMonthlyEvents where ev.Id == Convert.ToInt32(e.Id) select ev).First();
 
                     if (toBeResized.UserName == Controller.User.Identity.Name)
                     {
                         toBeResized.EventStart = e.NewStart;
                         toBeResized.EventEnd = e.NewEnd;
-                        _db.SubmitChanges();
+                        db.SubmitChanges();
                         Update();                       
                     }
                     else
@@ -92,6 +94,8 @@ namespace Stacja_paliw.Controllers
 
             protected override void OnTimeRangeSelected(TimeRangeSelectedArgs e)
             {
+                CalendarEventsDataContext db = new CalendarEventsDataContext();
+
                 try
                 {
                     if (Controller.User.Identity.Name != null)
@@ -103,8 +107,8 @@ namespace Stacja_paliw.Controllers
                             Text = (string) e.Data["eventName"],
                             UserName = Controller.User.Identity.Name
                         };
-                        _db.CarWashMonthlyEvents.InsertOnSubmit(toBeCreated);
-                        _db.SubmitChanges();
+                        db.CarWashMonthlyEvents.InsertOnSubmit(toBeCreated);
+                        db.SubmitChanges();
                         Update(Events);
                     }
                     else

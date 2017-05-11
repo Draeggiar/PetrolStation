@@ -12,7 +12,7 @@
             <ul class="dropdown-menu">
                  @*<li class="dropdown-item">@Html.ActionLink("Cennik", "IndexLast", "Prices")</li>*@
                 <li class="dropdown-item">@Html.ActionLink("Faktury Vat", "VatsHistory", "VATs")</li>
-                <li class="dropdown-item">Myjnia</li>
+                <li class="dropdown-item">@Html.ActionLink("Myjnia", "Index", "CarWash")</li>
             </ul>
         </li>
     </ul>
@@ -26,7 +26,7 @@
                aria-expanded="false" class="dropdown-toggle nav-link">Narzędzia<span class="caret"></span></a>
             <ul class="dropdown-menu">
                 <li class="dropdown-item">
-                    @Html.ActionLink("Zarządzanie monitoringiem", "Index", "WorkerPanel",new { area = "Worker" }, null)
+                    <a href="~/Areas/Worker/WorkerPanel.aspx">Panel pracownika</a>
                 </li>
                 <li class="dropdown-item">@Html.ActionLink("Faktura VAT", "Landing", "VATs")</li>
             </ul>

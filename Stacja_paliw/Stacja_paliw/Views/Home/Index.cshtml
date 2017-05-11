@@ -26,18 +26,18 @@
         });
     </script>
     <script type="text/javascript">
-            $("#btn-2-img").click(function () {
+        $("#btn-2-img").click(function () {
             $.get('@Url.Action("LoyalityPartial", "Home")', {}, function (response) {
                 $("#LoyalityPartial").html(response);
             });
-                $("#VatsPartial").hide();
-                if ($("#LoyalityPartial").is(":visible")) {
-                    $("#LoyalityPartial").hide();
-                }
-                else {
-                    $("#LoyalityPartial").show();
-                }
-            });
+            $("#VatsPartial").hide();
+            if ($("#LoyalityPartial").is(":visible")) {
+                $("#LoyalityPartial").hide();
+            }
+            else {
+                $("#LoyalityPartial").show();
+            }
+        });
     </script>
     @*<script type="text/javascript">
         function HideVat() {
