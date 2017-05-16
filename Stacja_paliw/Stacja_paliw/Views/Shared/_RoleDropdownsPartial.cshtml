@@ -3,21 +3,6 @@
     ViewBag.Title = "_RoleDropdownsPartial";
 }
 
-@if (Request.IsAuthenticated && (User.IsInRole("Client") || User.IsInRole("Admin")))
-{
-    <ul class="nav navbar-nav justify-content-start">
-        <li class="dropdown nav-item">
-            <a href="#" data-toggle="dropdown" role="button" aria-haspopup="true"
-               aria-expanded="false" class="dropdown-toggle nav-link">Strefa Klienta<span class="caret"></span></a>
-            <ul class="dropdown-menu">
-                 @*<li class="dropdown-item">@Html.ActionLink("Cennik", "IndexLast", "Prices")</li>*@
-                <li class="dropdown-item">@Html.ActionLink("Faktury Vat", "VatsHistory", "VATs")</li>
-                <li class="dropdown-item">@Html.ActionLink("Myjnia", "Index", "CarWash")</li>
-            </ul>
-        </li>
-    </ul>
-}
-
 @if (Request.IsAuthenticated && (User.IsInRole("Employee") || User.IsInRole("Admin")))
 {
     <ul class="nav navbar-nav justify-content-start">
@@ -28,7 +13,6 @@
                 <li class="dropdown-item">
                     <a href="~/Areas/Worker/WorkerPanel.aspx">Panel pracownika</a>
                 </li>
-                <li class="dropdown-item">@Html.ActionLink("Faktura VAT", "Landing", "VATs")</li>
             </ul>
         </li>
     </ul>

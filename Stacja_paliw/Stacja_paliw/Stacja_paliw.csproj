@@ -385,6 +385,7 @@
     <Content Include="Views\Home\_PointsPartial.cshtml" />
     <Content Include="Views\Home\Terms.cshtml" />
     <Content Include="Views\CarWash\Index.cshtml" />
+    <Content Include="Views\CarWash\_Prices.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

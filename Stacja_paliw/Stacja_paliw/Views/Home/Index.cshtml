@@ -6,23 +6,24 @@
 
 @section style {
     <link href="~/Content/Home.css" rel="stylesheet" type="text/css" />
-    }
+}
 
 @section scripts {
     <script src="~/Scripts/jquery-3.1.1.min.js"></script>
     <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
     <script type="text/javascript">
-        $("#btn-1-img").click(function () {
-        $.get('@Url.Action("PartialHistory", "VATs")', {}, function (response) {
-            $("#VatsPartial").html(response);
-        });
+        $(document).on('click', '#btn-1-img', function () {
+            $.get('@Url.Action("PartialHistory", "VATs")', {}, function (response) {
+                $("#VatsPartial").html(response);
+            });
             $("#LoyalityPartial").hide();
-            if($("#VatsPartial").is(":visible")){
+            $("#CarWashPartial").hide();
+            if ($("#VatsPartial").is(":visible")) {
                 $("#VatsPartial").hide();
             }
             else {
                 $("#VatsPartial").show();
-            }           
+            }
         });
     </script>
     <script type="text/javascript">
@@ -31,6 +32,7 @@
                 $("#LoyalityPartial").html(response);
             });
             $("#VatsPartial").hide();
+            $("#CarWashPartial").hide();
             if ($("#LoyalityPartial").is(":visible")) {
                 $("#LoyalityPartial").hide();
             }
@@ -39,15 +41,22 @@
             }
         });
     </script>
-    @*<script type="text/javascript">
-        function HideVat() {
-            var x = document.getElementById('LoyalityPartial');
-            if (x.style.display === 'block') {
-                x.style.display = 'none';
+<script type="text/javascript">
+        $("#btn-3-img").click(function () {
+            $.get('@Url.Action("CarWashPartial")', {}, function (response) {
+                $("#CarWashPartial").html(response);
+            });
+            $("#VatsPartial").hide();
+            $("#LoyalityPartial").hide();
+            if ($("#CarWashPartial").is(":visible")) {
+                $("#CarWashPartial").hide();
             }
-        }
-    </script>*@
-    }
+            else {
+                $("#CarWashPartial").show();
+            }
+        });
+</script>
+}
 
 <div class="container main">
     <div class="row">
@@ -119,6 +128,8 @@
             </button>
         </div>
     </div>
-    <div id="VatsPartial"></div>
-    <div id="LoyalityPartial"></div>
+
+    <div id="VatsPartial" style="display: none"></div>
+    <div id="LoyalityPartial" style="display: none"></div>
+    <div id="CarWashPartial" style="display: none"></div>
 </div>

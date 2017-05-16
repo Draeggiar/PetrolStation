@@ -1,0 +1,21 @@
+﻿@model List<Tuple<string, string>>
+
+<table style="width: 80%">
+    <thead>
+    <tr>
+        <td>Usługa</td>
+        <td>Cena</td>
+    </tr>
+    </thead>
+    @foreach (Tuple<string, string> service in Model)
+    {
+        <tr>
+            <td>@service.Item1</td>
+            <td>@service.Item2</td>
+        </tr>
+    }
+</table>
+
+<br />
+
+<p>@Html.ActionLink("Rezerwacja terminu mycia", "Index", "CarWash")</p>
