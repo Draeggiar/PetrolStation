@@ -4,16 +4,16 @@ namespace FuelDistributors
 {
     public class FuelTank
     {
-        private double _pressureInTank;
-        private double _temperature;
+        public double PressureInTank;
+        public double Temperature;
 
         public double FuelLevel;
 
         public FuelTank(double fuelLevel, double pressure, double temperature)
         {
-            _pressureInTank = pressure;
+            PressureInTank = pressure;
             FuelLevel = fuelLevel;
-            _temperature = temperature;
+            Temperature = temperature;
         }
 
         public void GenerateParamethers()
@@ -21,19 +21,19 @@ namespace FuelDistributors
             Random rnd = new Random();
             if (rnd.Next()%2 == 0)
             {
-                _pressureInTank += rnd.NextDouble();
-                _temperature += rnd.NextDouble();
+                PressureInTank += rnd.NextDouble();
+                Temperature += rnd.NextDouble();
             }
             else
             {
-                _pressureInTank -= rnd.NextDouble();
-                _temperature -= rnd.NextDouble();
+                PressureInTank -= rnd.NextDouble();
+                Temperature -= rnd.NextDouble();
             }
         }
 
         public bool IsSafe()
         {
-            if (_pressureInTank >= 0.2 && _pressureInTank <= 4 && _temperature > 0 && _temperature < 25)
+            if (PressureInTank >= 0.2 && PressureInTank <= 4 && Temperature > 0 && Temperature < 25)
             {
                 return true;
             }
@@ -45,8 +45,8 @@ namespace FuelDistributors
 
         public void MakeSafe()
         {
-            _pressureInTank = 2.5;
-            _temperature = 5.0;
+            PressureInTank = 2.5;
+            Temperature = 5.0;
         }
     }
 }

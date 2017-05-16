@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="FuelTankParamethers">
+  <DataContextMoniker Name="/FuelTankParamethersDataContext" />
+  <nestedChildShapes>
+    <classShape Id="bb26bfd8-d3f3-4196-b66b-1a7aec5da9b5" absoluteBounds="2.75, 1.125, 2, 1.7708968098958331">
+      <DataClassMoniker Name="/FuelTankParamethersDataContext/FuelTanksParamether" />
+      <nestedChildShapes>
+        <elementListCompartment Id="753a0504-011d-46ae-b323-433def439e84" absoluteBounds="2.765, 1.585, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

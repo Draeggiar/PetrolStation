@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Web.UI.WebControls;
 using FuelDistributors;
+using Stacja_paliw.DAL;
 
 namespace Stacja_paliw.Areas.Worker
 {
@@ -61,25 +62,30 @@ namespace Stacja_paliw.Areas.Worker
                 {
                     var btnAcceptTransaction1 = (Button)item.FindControl("btnAcceptTransaction1");
                     var btnAcceptTransaction2 = (Button)item.FindControl("btnAcceptTransaction1");
+                    var lblDistName = (Label)item.FindControl("lblDistName");
+                    var lblVolume = (Label)item.FindControl("lblFuelVolume");
+                    var lblTotalPrice = (Label)item.FindControl("lblTotalPrice");
+
                     if (senderButton.GetHashCode() == btnAcceptTransaction1.GetHashCode())
                     {
-                        var lblDistName = (Label)item.FindControl("lblDistName");
-                        var lblVolume = (Label)item.FindControl("lblFuelVolume");
-                        var lblTotalPrice = (Label)item.FindControl("lblTotalPrice");
-
                         Response.Redirect("/Vats/Landing/?volume=" + lblVolume.Text +
                                          "&fuelType=" + lblDistName.Text);
                         _distributors.First(d => d.DistributorName == lblDistName.Text).ResetDistributor();
                     }
                     else if (senderButton.GetHashCode() == btnAcceptTransaction2.GetHashCode())
                     {
-                        var lblDistName = (Label)item.FindControl("lblDistName");
-                        var lblVolume = (Label)item.FindControl("lblFuelVolume");
-                        var lblTotalPrice = (Label)item.FindControl("lblTotalPrice");
-
                         Response.Redirect("/Transaction/Rachunek/?volume=" + lblVolume.Text +
                                          "&totalPrice=" + lblTotalPrice.Text);
                         _distributors.First(d => d.DistributorName == lblDistName.Text).ResetDistributor();
+                    }
+
+                    FuelTankParamethersDataContext db = new FuelTankParamethersDataContext();
+                    foreach (var fuelTank in db.FuelTanksParamethers)
+                    {
+                        fuelTank.Name = lblDistName.Text;
+                        fuelTank.FuelLevel = (decimal) _distributors.First(d => d.DistributorName == lblDistName.Text).FuelTank.FuelLevel;
+                        fuelTank.Pressure = (decimal)_distributors.First(d => d.DistributorName == lblDistName.Text).FuelTank.PressureInTank;
+                        fuelTank.Temperature = (decimal)_distributors.First(d => d.DistributorName == lblDistName.Text).FuelTank.Temperature;
                     }
                 }
             }
