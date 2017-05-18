@@ -27,6 +27,25 @@ namespace Stacja_paliw.Controllers
             return View("PricesSimpleThumbnail", db.Prices.ToList().Last());
         }
 
+        public ActionResult EditMain()
+        {
+            return View(db.Prices.FirstOrDefault());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditMain([Bind(Include = "Id,Date,Pb95,Pb98,Lpg,On,Wash,Waxing")] Price price)
+        {
+            if (ModelState.IsValid)
+            {
+                price.Date = DateTime.Today;
+                db.Entry(price).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index", "Home");
+            }
+            return View(price);
+        }
+
         // GET: Prices/Details/5
         public ActionResult Details(int? id)
         {

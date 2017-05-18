@@ -26,8 +26,9 @@
                aria-expanded="false" class="dropdown-toggle nav-link">Narzędzia szefa<span class="caret"></span></a>
             <ul class="dropdown-menu">
                 <li>@Html.ActionLink("Role Manager", "Index", "Roles")</li>
-                <li class="dropdown-item">Raporty</li>
-                <li class="dropdown-item">Dostawy</li>
+                <li>@Html.ActionLink("Edycja cen", "EditMain", "Prices")</li>
+                @*<li class="dropdown-item">Raporty</li>
+                <li class="dropdown-item">Dostawy</li>*@
             </ul>
         </li>
     </ul>
