@@ -13,12 +13,12 @@ namespace Stacja_paliw.Areas.Worker.Controllers
             try
             {
                 ServiceClient.Open();
-                ViewBag.Authenticate = "Pomyślnie uwierzytelniono. Witaj " + User.Identity.Name;
+                ViewBag.Authenticate = "Pomyślnie uwierzytelniono.";
                 ViewBag.ServiceStatus = ServiceClient.GetServiceStatus().MonitoringStarted.ToString().ToLower();
             }            
-            catch (Exception)
+            catch (Exception exception)
             {
-                ViewBag.Authenticate = "Błąd autentykacji!";
+                //ViewBag.Authenticate = "Błąd autentykacji!" + exception.Message;
             }
 
             return View();

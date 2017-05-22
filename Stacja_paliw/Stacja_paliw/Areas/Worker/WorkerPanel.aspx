@@ -4,7 +4,8 @@
     <asp:ScriptManager runat="server" />
     <asp:Timer runat="server" ID="timUpdater" Interval="1000" />
 
-    <a href='http://<%:HttpContext.Current.Request.Url.Authority %>/Worker/Monitoring' class="btn-link">Centrum monitoringu</a>
+    <a href='http://<%:HttpContext.Current.Request.Url.Authority %>/Worker/Monitoring' class="nav-link">Centrum monitoringu</a>
+    <a href="ParamethersCheck.aspx" class="nav-link">Sprawdź stan zbiorników</a>
     <br />
 
     <asp:UpdatePanel runat="server">
@@ -14,7 +15,7 @@
         <ContentTemplate>
             <asp:Repeater ID="rptTransactions" runat="server" EnableViewState="True">
                 <HeaderTemplate>
-                    <table width="80%">
+                    <table style="width: 80%; margin-left:5%">
                         <tr>
                             <th>Dystrybutor</th>
                             <th>Ilość paliwa</th>
