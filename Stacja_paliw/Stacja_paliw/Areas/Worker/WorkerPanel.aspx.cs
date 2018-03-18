@@ -83,9 +83,9 @@ namespace Stacja_paliw.Areas.Worker
                     foreach (var fuelTank in db.FuelTanksParamethers)
                     {
                         fuelTank.Name = lblDistName.Text;
-                        fuelTank.FuelLevel = (decimal) _distributors.First(d => d.DistributorName == lblDistName.Text).FuelTank.FuelLevel;
-                        fuelTank.Pressure = (decimal)_distributors.First(d => d.DistributorName == lblDistName.Text).FuelTank.PressureInTank;
-                        fuelTank.Temperature = (decimal)_distributors.First(d => d.DistributorName == lblDistName.Text).FuelTank.Temperature;
+                        fuelTank.FuelLevel = Convert.ToDecimal(_distributors.First(d => d.DistributorName == lblDistName.Text).FuelTank.FuelLevel);
+                        fuelTank.Pressure = Convert.ToDecimal(_distributors.First(d => d.DistributorName == lblDistName.Text).FuelTank.PressureInTank);
+                        fuelTank.Temperature = Convert.ToDecimal(_distributors.First(d => d.DistributorName == lblDistName.Text).FuelTank.Temperature);
                     }
                 }
             }
